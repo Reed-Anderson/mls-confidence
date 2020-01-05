@@ -33,7 +33,7 @@ type FormStateIndexer =
     | 'Email'
     | 'MobileNumber'
     | 'Password'
-    | 'ConfirmPassword'
+    | 'ConfirmPassword';
 
 /**
  * Functional Component for the about page
@@ -113,10 +113,9 @@ const RegisterView = () => {
 
     /* Submit the register form */
     const submitForm = () => {
-        console.log('submitting')
         firebase.createUser(registerForm.Email, registerForm.Password)
             .then(() => {
-                history.push('/')
+                history.push('/');
             })
             .catch(reason => {
                 setErrorMessage(reason.message);

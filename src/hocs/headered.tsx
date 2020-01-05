@@ -128,43 +128,31 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
 
     /* The sidebar on mobile screen sizes */
     const smallSidebar = () => (
-        <Layer>
-            <Box
-                align='center'
-                as='header'
-                background='light-2'
-                direction='row'
-                justify='end'
-            >
-                <Button
-                    icon={<FormClose />}
-                    onClick={toggleSidebarOpen}
-                />
-            </Box>
-            <Box
-                align='center'
-                background='light-2'
-                fill
-                justify='center'
-            >
-                {renderSidebarOptions()}
-            </Box>
-        </Layer>
+        showSidebar && (
+            <Layer>
+                <Box
+                    align='center'
+                    as='header'
+                    background='light-2'
+                    direction='row'
+                    justify='end'
+                >
+                    <Button
+                        icon={<FormClose />}
+                        onClick={toggleSidebarOpen}
+                    />
+                </Box>
+                <Box
+                    align='center'
+                    background='light-2'
+                    fill
+                    justify='center'
+                >
+                    {renderSidebarOptions()}
+                </Box>
+            </Layer>
+        )
     );
-
-    const sidebar = (size: string) => {
-        if (showSidebar) {
-            if (size === 'small') {
-                return smallSidebar();
-            }
-            else {
-                return standardSidebar();
-            }
-        }
-        else {
-            return null;
-        }
-    };
 
     return (
         <ResponsiveContext.Consumer>
@@ -177,7 +165,7 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
                         overflow='hidden'
                     >
                         {wrappedContent()}
-                        {sidebar(size)}
+                        {size === 'small' ? smallSidebar() : standardSidebar()}
                     </Box>
                 </Box>
             )}

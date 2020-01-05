@@ -55,9 +55,7 @@ const SidebarOption = (props: SidebarOptionProps) => {
 
     /* Constant for the classname of the option */
     const className = props.activeDisplayName === props.displayName ?
-        'active'
-        :
-        '';
+        'active' : '';
 
     /* Call props.onClick if passed, always toggle sidebar */
     const onClick = () => {

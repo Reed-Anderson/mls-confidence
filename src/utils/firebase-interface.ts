@@ -22,13 +22,19 @@ const firebaseConfig = {
  */
 class Firebase {
     constructor() {
+        /* Only initialize app if it has not yet been initialized */
         if (FireBase.apps.length === 0) {
             this._app = FireBase.initializeApp(firebaseConfig);
         }
         else {
             this._app = FireBase.apps[0];
         }
+        /* Initialize week map */
+        this.Weeks = new Map();
     }
+
+    /* Public Variables */
+    Weeks: Map<number, Object>
 
     /* Private variables */
     private _app: FireBase.app.App;
@@ -44,16 +50,31 @@ class Firebase {
     }
 
     /* Get the currently signed in user */
-    getCurrentUser = () => this._app.auth().currentUser
-
-    /* Gets the games in a week */
-    getGames = (weekNumber: number) => {
-        return this._app.firestore().collectionGroup('games').get()
+    getCurrentUser = () => {
+        return this._app.auth().currentUser;
     }
 
-    /* Gets a week of games */
-    getWeek = (weekNumber: number) => {
-        return this._app.firestore().doc(`weeks/${weekNumber}`).get();
+    /**
+     * Adds the given week number to the cached map of weeks
+     * Returns promise indicating completion
+     */
+    requestWeek = (weekNumber: number) => {
+        return new Promise((resolve, reject) => {
+            const weekRef = this._app.firestore().doc(`weeks/${weekNumber}`);
+            weekRef.onSnapshot(
+                (snapshot) => {
+                    if (snapshot.exists) {
+                        const data = snapshot.data();
+                        this.Weeks.set(weekNumber, data);
+                        resolve();
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                    reject();
+                }
+            );
+        });
     }
 
     /* Send an email to reset a user's password */

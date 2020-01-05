@@ -4,6 +4,7 @@ import Headered from '../hocs/headered';
 import ViewTitle from '../components/view-title';
 import { useParams } from 'react-router-dom';
 import { FirebaseContext } from '../launch/app';
+import TeamScoreSelect from '../components/game-picker';
 
 /**
  * Functional Component for the about page
@@ -12,24 +13,26 @@ const PickView = () => {
     /* Pull week number from url params */
     const { weekNumber } = useParams();
 
-    /* Grab week from database */
+    /* Use firebase context */
     const firebase = React.useContext(FirebaseContext);
-    const weekPromise = firebase.getWeek(parseInt(weekNumber));
-    const gamesPromise = firebase.getGames(parseInt(weekNumber));
 
-    /* Use useEffect for this. This is just me testing */
-    weekPromise.then(week => {
-        console.log(week.data());
-    });
-    gamesPromise.then(games => {
-        console.log(games);
-        console.log(games.docs);
-        games.docs.forEach(doc => console.log(doc));
-    });
+    /* On init, promise the week */
+    // React.useEffect(() => {
+    //     const weekPromise = firebase.requestWeek(parseInt(weekNumber));
+    //     weekPromise.then(() => {
+    //         const someData = firebase.Weeks.get(parseInt(weekNumber));
+    //         console.log(parseInt(weekNumber), someData);
+    //     })
+    // }, [])
 
+    /* Render the pick display */
     return (
         <Box as='div' fill align='center'>
             <ViewTitle title={`Picks for Week ${weekNumber}!`} />
+            <TeamScoreSelect
+                AwayTeamName='Vancouver Whitecaps'
+                HomeTeamName='Sporting Kansas City'
+            />
         </Box>
     );
 };
