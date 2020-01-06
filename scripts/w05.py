@@ -64,8 +64,8 @@ week5 = {
             'minute': 0
         },
         {
-            'home': 'FCD',
-            'away': 'LAF',
+            'home': 'DAL',
+            'away': 'LFC',
             'year': 2020,
             'month': 4,
             'date': 4,

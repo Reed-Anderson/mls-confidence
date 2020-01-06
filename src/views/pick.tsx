@@ -16,23 +16,41 @@ const PickView = () => {
     /* Use firebase context */
     const firebase = React.useContext(FirebaseContext);
 
+    /* Week state */
+    const [week, setWeek] = React.useState(
+        null as firebase.firestore.DocumentData
+    );
+
     /* On init, promise the week */
-    // React.useEffect(() => {
-    //     const weekPromise = firebase.requestWeek(parseInt(weekNumber));
-    //     weekPromise.then(() => {
-    //         const someData = firebase.Weeks.get(parseInt(weekNumber));
-    //         console.log(parseInt(weekNumber), someData);
-    //     })
-    // }, [])
+    React.useEffect(() => {
+        const weekPromise = firebase.requestWeek(parseInt(weekNumber));
+        weekPromise.then(setWeek);
+    }, []);
+
+    /* Render list of games this week */
+    const renderWeekInfo = () => {
+        if (week?.games) {
+            return week.games.map((game: any) => {
+                const homeRef: firebase.firestore.DocumentReference
+                    = game['home'];
+                const awayRef: firebase.firestore.DocumentReference
+                    = game['away'];
+                return (
+                    <TeamScoreSelect
+                        key={`${homeRef.id}_vs_${awayRef.id}`}
+                        AwayTeamId={homeRef.id}
+                        HomeTeamId={awayRef.id}
+                    />
+                )
+            });
+        }
+    }
 
     /* Render the pick display */
     return (
         <Box as='div' fill align='center'>
             <ViewTitle title={`Picks for Week ${weekNumber}!`} />
-            <TeamScoreSelect
-                AwayTeamName='Vancouver Whitecaps'
-                HomeTeamName='Sporting Kansas City'
-            />
+            {renderWeekInfo()}
         </Box>
     );
 };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Text, TextInput } from 'grommet';
+import { Box, Text, TextInput } from 'grommet';
 
 /* Interface for props */
 export interface TeamScorePickerProps {
@@ -14,6 +14,7 @@ export interface TeamScorePickerProps {
 const StyledTeamScoreSelect = styled.div`
     align-items: center;
     display: flex;
+    width: 300px;
 `;
 
 /* Style for Text input */
@@ -34,7 +35,7 @@ const TeamScorePicker = ( props: TeamScorePickerProps ) => {
             <TextInput
                 onChange={e => props.onChange(parseInt(e.target.value))}
                 type='number'
-                value={props.score}
+                value={props.score || 0}
             />
         </StyledInputWrapper>
     );
@@ -47,11 +48,15 @@ const TeamScorePicker = ( props: TeamScorePickerProps ) => {
     /* Return TeamScorePicker component */
     return (
         <StyledTeamScoreSelect>
-            {!props.labelOnLeft && Input}
-            {!props.labelOnLeft && GrowDiv}
-            <Text size='medium'>{props.teamName}</Text>
-            {props.labelOnLeft && GrowDiv}
-            {props.labelOnLeft && Input}
+            <Box direction='row' flex='grow'>
+                {!props.labelOnLeft && Input}
+                {!props.labelOnLeft && GrowDiv}
+            </Box>
+            <Text size='medium' textAlign='center'>{props.teamName}</Text>
+            <Box direction='row' flex='grow'>
+                {props.labelOnLeft && GrowDiv}
+                {props.labelOnLeft && Input}
+            </Box>
         </StyledTeamScoreSelect>
     );
 };

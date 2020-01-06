@@ -74,7 +74,7 @@ week4 = {
         },
         {
             'home': 'SEA',
-            'away': 'FCD',
+            'away': 'DAL',
             'year': 2020,
             'month': 3,
             'date': 21,
@@ -109,7 +109,7 @@ week4 = {
             'minute': 0
         },
         {
-            'home': 'LAF',
+            'home': 'LFC',
             'away': 'POR',
             'year': 2020,
             'month': 3,

@@ -2,7 +2,7 @@ week3 = {
     'games': [
         {
             'home': 'NYC',
-            'away': 'FCD',
+            'away': 'DAL',
             'year': 2020,
             'month': 3,
             'date': 14,

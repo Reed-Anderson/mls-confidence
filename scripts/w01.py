@@ -37,7 +37,7 @@ week1 = {
             'minute': 30
         },
         {
-            'home': 'FCD',
+            'home': 'DAL',
             'away': 'PHI',
             'year': 2020,
             'month': 2,
@@ -100,7 +100,7 @@ week1 = {
             'minute': 0
         },
         {
-            'home': 'LAF',
+            'home': 'LFC',
             'away': 'MIA',
             'year': 2020,
             'month': 3,

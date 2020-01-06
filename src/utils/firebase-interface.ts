@@ -29,15 +29,39 @@ class Firebase {
         else {
             this._app = FireBase.apps[0];
         }
-        /* Initialize week map */
-        this.Weeks = new Map();
     }
-
-    /* Public Variables */
-    Weeks: Map<number, Object>
 
     /* Private variables */
     private _app: FireBase.app.App;
+
+    /***
+     * Private Functions
+     **/
+
+    /* Handle a snapshot of a Document reference */
+    private handleRef = (
+        docRef: FireBase.firestore.DocumentReference,
+        resolve: (data: any) => void,
+        reject: () => void
+    ) => {
+        docRef.onSnapshot(
+            (snapshot) => {
+                if (snapshot.exists) {
+                    const data: FireBase.firestore.DocumentData
+                        = snapshot.data();
+                    resolve(data);
+                }
+            },
+            (error) => {
+                console.log(error);
+                reject();
+            }
+        );
+    }
+
+    /***
+     * Public Functions
+     **/
 
     /* Create a user with email and password */
     createUser = (email: string, password: string) => {
@@ -55,25 +79,26 @@ class Firebase {
     }
 
     /**
-     * Adds the given week number to the cached map of weeks
-     * Returns promise indicating completion
+     * Returns promise of the given team in the database
      */
-    requestWeek = (weekNumber: number) => {
+    requestTeam = (
+        teamId: string
+    ): Promise<FireBase.firestore.DocumentData> => {
+        return new Promise((resolve, reject) => {
+            const teamRef = this._app.firestore().doc(`teams/${teamId}`);
+            this.handleRef(teamRef, resolve, reject);
+        });
+    }
+
+    /**
+     * Returns promise of the given week in the database
+     */
+    requestWeek = (
+        weekNumber: number
+    ): Promise<FireBase.firestore.DocumentData> => {
         return new Promise((resolve, reject) => {
             const weekRef = this._app.firestore().doc(`weeks/${weekNumber}`);
-            weekRef.onSnapshot(
-                (snapshot) => {
-                    if (snapshot.exists) {
-                        const data = snapshot.data();
-                        this.Weeks.set(weekNumber, data);
-                        resolve();
-                    }
-                },
-                (error) => {
-                    console.log(error);
-                    reject();
-                }
-            );
+            this.handleRef(weekRef, resolve, reject);
         });
     }
 
