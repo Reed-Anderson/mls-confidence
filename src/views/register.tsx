@@ -52,10 +52,10 @@ const RegisterView = () => {
     const [errorMessage, setErrorMessage] = React.useState('');
 
     /* Regexes for validation */
-    /* Credit to Srinivas at https://tinyurl.com/ycx7b6mt for password regex */
+    /* Credit to Philip Bulley at https://tinyurl.com/ycx7b6mt */
     const lettersOnlyRegex = /^[a-zA-Z]+$/;
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/;
 
     /* Change the value of a form input */
     const onChange = (event: React.ChangeEvent<HTMLFormElement>) => {

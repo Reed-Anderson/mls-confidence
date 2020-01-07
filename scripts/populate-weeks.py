@@ -7,6 +7,11 @@ from w03 import week3
 from w04 import week4
 from w05 import week5
 
+##
+# run before scripting:
+# set GOOGLE_APPLICATION_CREDENTIALS=ServiceAccountKey.json
+##
+
 # Instantiate DB Instance
 db = firestore.Client()
 # Magic number my timezone
