@@ -31,6 +31,11 @@ class Firebase {
         }
     }
 
+    /***
+     * Public Variables
+     **/
+    DataMap: Map<string, FireBase.firestore.DocumentData> = new Map()
+
     /* Private variables */
     private _app: FireBase.app.App;
 
@@ -40,23 +45,33 @@ class Firebase {
 
     /* Handle a snapshot of a Document reference */
     private handleRef = (
-        docRef: FireBase.firestore.DocumentReference,
-        resolve: (data: any) => void,
+        docPath: string,
+        resolve: (data: FireBase.firestore.DocumentData) => void,
         reject: () => void
     ) => {
-        docRef.onSnapshot(
-            (snapshot) => {
-                if (snapshot.exists) {
-                    const data: FireBase.firestore.DocumentData
-                        = snapshot.data();
-                    resolve(data);
+
+        /* If requested data is new, add new listener to it */
+        const existingData = this.DataMap.get(docPath);
+        if (!existingData) {
+            const docRef = this._app.firestore().doc(docPath);
+            docRef.onSnapshot(
+                (snapshot) => {
+                    if (snapshot.exists) {
+                        const data = snapshot.data();
+                        this.DataMap.set(docPath, data);
+                        resolve(data);
+                    }
+                },
+                (error) => {
+                    console.log(error);
+                    reject();
                 }
-            },
-            (error) => {
-                console.log(error);
-                reject();
-            }
-        );
+            );
+        }
+        /* If we are already listening to data, just return the value */
+        else {
+            resolve(existingData);
+        }
     }
 
     /***
@@ -78,6 +93,9 @@ class Firebase {
         return this._app.auth().currentUser;
     }
 
+    /* Remove all listeners */
+    terminate = () => this._app.firestore().terminate();
+
     /**
      * Returns promise of the given team in the database
      */
@@ -85,8 +103,8 @@ class Firebase {
         teamId: string
     ): Promise<FireBase.firestore.DocumentData> => {
         return new Promise((resolve, reject) => {
-            const teamRef = this._app.firestore().doc(`teams/${teamId}`);
-            this.handleRef(teamRef, resolve, reject);
+            const docPath = `teams/${teamId}`;
+            this.handleRef(docPath, resolve, reject);
         });
     }
 
@@ -97,8 +115,8 @@ class Firebase {
         weekNumber: number
     ): Promise<FireBase.firestore.DocumentData> => {
         return new Promise((resolve, reject) => {
-            const weekRef = this._app.firestore().doc(`weeks/${weekNumber}`);
-            this.handleRef(weekRef, resolve, reject);
+            const docPath = `weeks/${weekNumber}`;
+            this.handleRef(docPath, resolve, reject);
         });
     }
 

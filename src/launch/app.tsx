@@ -35,6 +35,13 @@ export const FirebaseContext = React.createContext(firebaseInstance);
  * and Routes to desired views through the URL
  */
 const App = () => {
+
+    /* Remove listeners after unmount */
+    React.useEffect(() => {
+        return () => firebaseInstance.terminate();
+    });
+
+    /* Return App */
     return (
         <Grommet theme={theme} full>
             <BrowserRouter>
