@@ -99,11 +99,9 @@ class Firebase {
     /**
      * Returns promise of the given team in the database
      */
-    requestTeam = (
-        teamId: string
-    ): Promise<FireBase.firestore.DocumentData> => {
+    requestTeams = (): Promise<FireBase.firestore.DocumentData> => {
         return new Promise((resolve, reject) => {
-            const docPath = `teams/${teamId}`;
+            const docPath = 'maps/teams';
             this.handleRef(docPath, resolve, reject);
         });
     }
