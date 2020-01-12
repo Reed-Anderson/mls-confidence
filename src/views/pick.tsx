@@ -69,6 +69,9 @@ const PickView = () => {
 
     /* Set the AwayGoals for the game at the given index */
     const setAwayGoals = (newIndex: number, newGoalCount: number) => {
+        if (newGoalCount < 0) {
+            newGoalCount = 0;
+        }
         setPicks(prevPicks => prevPicks.map((pick, index) => {
             if (newIndex === index) {
                 pick.AwayGoals = newGoalCount;
@@ -96,6 +99,9 @@ const PickView = () => {
 
     /* Set the HomeGoals for the game at the given index */
     const setHomeGoals = (newIndex: number, newGoalCount: number) => {
+        if (isNaN(newGoalCount) || newGoalCount < 0) {
+            newGoalCount = 0;
+        }
         setPicks(prevPicks => prevPicks.map((pick, index) => {
             if (newIndex === index) {
                 pick.HomeGoals = newGoalCount;

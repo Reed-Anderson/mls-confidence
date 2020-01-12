@@ -35,8 +35,6 @@ const DesktopConfidencePicker = React.memo((props: Props) => {
         }
     }
 
-    /* Use callback to set the confidence */
-
     /* Display all numbers with a "Confidence" label */
     return (
         <Box

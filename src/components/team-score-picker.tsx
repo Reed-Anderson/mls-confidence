@@ -45,11 +45,11 @@ const TeamScorePicker = React.memo((props: Props) => {
      *  depending on props
      */
     const Input = (
-        <Box width='75px'>
+        <Box width='80px'>
             <TextInput
                 onChange={e => props.onChange(parseInt(e.target.value))}
                 type='number'
-                value={props.score || 0}
+                value={props.score.toString() || '0'}
             />
         </Box>
     );

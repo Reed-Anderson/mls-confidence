@@ -5,6 +5,7 @@ import TeamScorePicker from './team-score-picker';
 import DesktopConfidencePicker from './desktop-confidence-picker';
 import { GamePick } from '../views/pick';
 import { arraysEqual } from '../utils/helpers';
+import MobileConfidencePicker from './mobile-confidence-picker';
 
 /* Props for the component */
 interface Props extends GamePick {
@@ -50,22 +51,26 @@ const GamePicker = React.memo((props: Props) => {
                 <>
                     <Text
                         alignSelf='center'
-                        size='large'
+                        size='medium'
                     >
                         {props.Kickoff}
                     </Text>
                     <Box
+                        align={size === 'small' ? 'center' : undefined}
                         background='light-1'
                         border={{ color: COLORS['brand'], size: 'xsmall' }}
                         elevation='small'
                         flex={false}
-                        gap='small'
+                        gap={size === 'small' ? '' : 'small'}
                         margin={{ top: 'xsmall', bottom: 'medium' }}
-                        width='675px'
+                        width={size === 'small' ? 'fit-content' : '675px'}
                         pad='small'
                         round='small'
                     >
-                        <Box direction={size === 'small' ? 'column' : 'row'}>
+                        <Box
+                            direction={size === 'small' ? 'column' : 'row'}
+                            width={size === 'small' ? 'fit-content' : ''}
+                        >
                             <TeamScorePicker
                                 labelOnLeft
                                 onChange={props.setHomeGoals}
@@ -73,7 +78,9 @@ const GamePicker = React.memo((props: Props) => {
                                 score={props.HomeGoals}
                                 teamName={props.HomeName}
                             />
-                            <div style={{ flexGrow: 1 }} />
+                            {size !== 'small' && (
+                                <div style={{ flexGrow: 1 }} />
+                            )}
                             <TeamScorePicker
                                 labelOnLeft={size === 'small'}
                                 onChange={props.setAwayGoals}
@@ -84,6 +91,14 @@ const GamePicker = React.memo((props: Props) => {
                         </Box>
                         {size !== 'small' && (
                             <DesktopConfidencePicker
+                                allNumbers={props.allNumbers}
+                                setConfidence={props.setConfidence}
+                                selectedNumber={props.Confidence}
+                                usedNumbers={props.usedNumbers}
+                            />
+                        )}
+                        {size === 'small' && (
+                            <MobileConfidencePicker
                                 allNumbers={props.allNumbers}
                                 setConfidence={props.setConfidence}
                                 selectedNumber={props.Confidence}
