@@ -11,7 +11,7 @@ week4 = {
         },
         {
             'home': 'NSC',
-            'away': 'COL',
+            'away': 'CLB',
             'year': 2020,
             'month': 3,
             'date': 21,

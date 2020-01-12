@@ -83,7 +83,7 @@ week2 = {
         },
         {
             'home': 'SEA',
-            'away': 'COL',
+            'away': 'CLB',
             'year': 2020,
             'month': 3,
             'date': 7,

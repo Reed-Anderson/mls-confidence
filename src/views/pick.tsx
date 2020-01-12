@@ -7,13 +7,14 @@ import ViewTitle from '../components/view-title';
 import GamePicker from '../components/game-picker';
 import { TeamID, TeamLookup } from '../utils/team-lookup';
 
+/* Interface for picking a single game */
 export interface GamePick {
-    AwayGoals?: number
-    AwayName?: string
+    AwayGoals: number
+    AwayName: string
     Confidence?: number
-    HomeGoals?: number
-    HomeName?: string
-    Kickoff?: string
+    HomeGoals: number
+    HomeName: string
+    Kickoff: string
 }
 
 /**

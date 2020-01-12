@@ -73,7 +73,7 @@ week5 = {
             'minute': 30
         },
         {
-            'home': 'COL',
+            'home': 'CLB',
             'away': 'TOR',
             'year': 2020,
             'month': 4,

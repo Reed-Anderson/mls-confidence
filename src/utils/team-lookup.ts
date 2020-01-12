@@ -1,3 +1,4 @@
+/* Union type of all team IDs */
 export type TeamID =
     'ATL' |
     'CHI' |
@@ -26,6 +27,7 @@ export type TeamID =
     'TOR' |
     'VAN'
 
+/* Lookup team by ID */
 export const TeamLookup = {
     ATL: { name: 'Atlanta United FC' },
     CHI: { name: 'Chicago Fire FC' },

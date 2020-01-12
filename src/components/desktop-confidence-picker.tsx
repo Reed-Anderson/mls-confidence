@@ -52,10 +52,13 @@ const DesktopConfidencePicker = React.memo((props: Props) => {
                 Confidence:
             </Text>
             {props.allNumbers.map(number => {
+
+                /* useCallback to avoid unnecessary rerenders */
                 const setConfidence = React.useCallback(
                     () => props.setConfidence(number),
                     []
                 );
+                
                 return (
                     <ToggleBox
                         key={number}

@@ -19,6 +19,7 @@ const StyledToggleBox = styled(Box)`
 /* ToggleBox component */
 const ToggleBox = React.memo((props: Props) => {
 
+    /* Shortcuts for active and dim */
     const active = props.status === 'active';
     const dim = props.status === 'dim';
     
@@ -28,6 +29,7 @@ const ToggleBox = React.memo((props: Props) => {
         size: 'small'
     }
     
+    /* Return the ToggleBox component */
     return (
         <StyledToggleBox
             background={active ? 'white' : ''}

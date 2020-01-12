@@ -21,11 +21,13 @@ const propsAreEqual = (a: Props, b: Props) => (
 /* Confidence Picker on mobile */
 const MobileConfidencePicker = React.memo((props: Props) => {
 
+    /* Options for confidence selector */
     const options = ['(none)'].concat(
         props.allNumbers.filter(num => !props.usedNumbers.includes(num))
             .map(num => num.toString())
     );
 
+    /* Handles selection of confidence */
     const onChange = (val: any) => (
         props.setConfidence( parseInt( val.value ) || undefined )
     );

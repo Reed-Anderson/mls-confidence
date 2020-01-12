@@ -73,7 +73,7 @@ week1 = {
             'minute': 30
         },
         {
-            'home': 'COL',
+            'home': 'CLB',
             'away': 'NYC',
             'year': 2020,
             'month': 3,

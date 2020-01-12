@@ -54,6 +54,7 @@ const TeamScorePicker = React.memo((props: Props) => {
         </Box>
     );
 
+    /* Box that grows and centers the team name */
     const TeamName = (
         <Box flex='grow'>
             <Text size='small' textAlign='center' weight='bold'>

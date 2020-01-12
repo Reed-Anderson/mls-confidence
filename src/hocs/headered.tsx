@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { APP_NAME, COLORS } from '../utils/constants';
+import { APP_NAME } from '../utils/constants';
 import {
     Box,
     Button,
@@ -154,6 +154,7 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
         )
     );
 
+    /* Return wrapped content in a Box below the header */
     return (
         <ResponsiveContext.Consumer>
             {size => (
