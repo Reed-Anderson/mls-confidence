@@ -32,12 +32,9 @@ def handleGame( dictGame ):
     )
     kickoff = kickoff + timedelta( hours=tz_offset )
 
-    home = db.collection( 'teams' ).document( dictGame.get( 'home' ) )
-    away = db.collection( 'teams' ).document( dictGame.get( 'away' ) )
-
     return {
-        'home': home,
-        'away': away,
+        'home': dictGame.get( 'home' ),
+        'away': dictGame.get( 'away' ),
         'kickoff': kickoff
     }
 

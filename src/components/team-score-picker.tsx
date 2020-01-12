@@ -1,64 +1,90 @@
 import * as React from 'react';
-import styled from 'styled-components';
 import { Box, Text, TextInput } from 'grommet';
+import { Checkmark, Close, Subtract } from 'grommet-icons';
 
 /* Interface for props */
-export interface TeamScorePickerProps {
+interface Props {
     labelOnLeft: boolean
-    onChange: ( newScore: number ) => void
+    onChange: (newScore: number) => void
+    pick: 'win' | 'lose' | 'tie'
     score: number
     teamName: string
 };
 
-/* Style for the component */
-const StyledTeamScoreSelect = styled.div`
-    align-items: center;
-    display: flex;
-    width: 300px;
-`;
-
-/* Style for Text input */
-const StyledInputWrapper = styled.div`
-    margin: 0 10px;
-    width: 75px;
-`;
-
 /* Team Score Picker Component */
-const TeamScorePicker = ( props: TeamScorePickerProps ) => {
-    
+const TeamScorePicker = React.memo((props: Props) => {
+
+    /* JSX.Element for pick icon */
+    let Icon: JSX.Element;
+    switch (props.pick) {
+        case 'win':
+            Icon = (
+                <Box margin='small'>
+                    <Checkmark color='status-ok' />
+                </Box>
+            );
+            break;
+        case 'lose':
+            Icon = (
+                <Box margin='small'>
+                    <Close color='status-warning' />
+                </Box>
+            );
+            break;
+        case 'tie':
+            Icon = (
+                <Box margin='small'>
+                    <Subtract />
+                </Box>
+            );
+            break;
+    }
+
     /**
      * Input to be render to the left or right of the label
      *  depending on props
      */
     const Input = (
-        <StyledInputWrapper>
+        <Box width='75px'>
             <TextInput
                 onChange={e => props.onChange(parseInt(e.target.value))}
                 type='number'
                 value={props.score || 0}
             />
-        </StyledInputWrapper>
+        </Box>
     );
 
-    /* Div with flexGrow style to fill space between Label and Input */
-    const GrowDiv = (
-        <div style={{ flexGrow: 1 }} />
+    const TeamName = (
+        <Box flex='grow'>
+            <Text size='small' textAlign='center' weight='bold'>
+                {props.teamName}
+            </Text>
+        </Box>
     );
 
     /* Return TeamScorePicker component */
     return (
-        <StyledTeamScoreSelect>
-            <Box direction='row' flex='grow'>
-                {!props.labelOnLeft && Input}
-                {!props.labelOnLeft && GrowDiv}
-            </Box>
-            <Text size='medium' textAlign='center'>{props.teamName}</Text>
-            <Box direction='row' flex='grow'>
-                {props.labelOnLeft && GrowDiv}
-                {props.labelOnLeft && Input}
-            </Box>
-        </StyledTeamScoreSelect>
+        <Box
+            align='center'
+            alignSelf='end'
+            direction='row'
+            width='315px'
+        >
+            {props.labelOnLeft ?
+                <>
+                    {Icon}
+                    {TeamName}
+                    {Input}
+                </>
+                :
+                <>
+                    {Input}
+                    {TeamName}
+                    {Icon}
+                </>
+            }
+        </Box>
     );
-};
+});
 
-export default TeamScorePicker
+export default TeamScorePicker;

@@ -10,7 +10,7 @@ export interface ViewTitleProps {
 /* Styled View Title */
 const StyledViewTitle = styled(Heading)`
     line-height: 30px;
-    margin: 50px 0;
+    margin: 50px 0 30px 0;
     text-align: center;
     width: 100%;
 `;

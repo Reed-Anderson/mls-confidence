@@ -34,7 +34,7 @@ class Firebase {
     /***
      * Public Variables
      **/
-    DataMap: Map<string, FireBase.firestore.DocumentData> = new Map()
+    DataMap: Map<string, FireBase.firestore.DocumentData> = new Map();
 
     /* Private variables */
     private _app: FireBase.app.App;

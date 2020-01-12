@@ -34,5 +34,6 @@ export const COLORS = {
     'dark-3': '#777777',
     'dark-4': '#999999',
     'dark-5': '#999999',
-    'dark-6': '#999999'
+    'dark-6': '#999999',
+    'white': '#FFFFFF'
 }
