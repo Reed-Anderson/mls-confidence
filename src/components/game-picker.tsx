@@ -45,6 +45,10 @@ const GamePicker = React.memo((props: Props) => {
         }
     };
 
+    /* Variable for the border color of the GamePicker */
+    const borderColor = props.Confidence ?
+        COLORS['brand'] : COLORS['status-warning']
+
     /* Return Game Picker component */
     return (
         <ResponsiveContext.Consumer>
@@ -59,7 +63,7 @@ const GamePicker = React.memo((props: Props) => {
                     <Box
                         align={size === 'small' ? 'center' : undefined}
                         background='light-1'
-                        border={{ color: COLORS['brand'], size: 'xsmall' }}
+                        border={{ color: borderColor, size: 'xsmall' }}
                         elevation='small'
                         flex={false}
                         gap={size === 'small' ? '' : 'small'}
