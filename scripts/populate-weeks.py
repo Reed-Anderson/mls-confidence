@@ -9,6 +9,11 @@ from w05 import week5
 from w06 import week6
 from w07 import week7
 from w08 import week8
+from w09 import week9
+from w10 import week10
+from w11 import week11
+from w12 import week12
+from w13 import week13
 
 ##
 # run before scripting:
@@ -22,7 +27,8 @@ tz_offset = 6
 # Create batch to commit all changes atomically
 batch = db.batch()
 # List all weeks to populate
-weeks = [ week1, week2, week3, week4, week5, week6, week7, week8 ]
+weeks = [ week1, week2, week3, week4, week5, week6, week7, week8,
+          week9, week10, week11, week12, week13 ]
 
 # Function to handle a dictionary representing a date
 def handleDate( dictDate ):
