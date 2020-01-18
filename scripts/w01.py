@@ -1,4 +1,11 @@
 week1 = {
+    'dueDate': {
+        'year': 2020,
+        'month': 2,
+        'date': 29,
+        'hour': 11,
+        'minute': 30
+    },
     'games': [
         {
             'home': 'DC',

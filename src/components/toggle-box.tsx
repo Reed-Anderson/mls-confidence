@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 /* Props for the component */
 interface Props {
-    onClick: () => void
+    onClick: (val: number) => void
     status: 'dim' | 'normal' | 'active'
-    value: string | number
+    value: number
 };
 
 /* Style for ToggleBox */
@@ -22,13 +22,13 @@ const ToggleBox = React.memo((props: Props) => {
     /* Shortcuts for active and dim */
     const active = props.status === 'active';
     const dim = props.status === 'dim';
-    
+
     /* Variable to control the border when active */
     const border: BorderType = {
         color: active ? 'accent-1' : 'light-1',
         size: 'small'
     }
-    
+
     /* Return the ToggleBox component */
     return (
         <StyledToggleBox
@@ -36,7 +36,7 @@ const ToggleBox = React.memo((props: Props) => {
             border={border}
             elevation={active ? 'xsmall' : ''}
             focusIndicator={false}
-            onClick={props.onClick}
+            onClick={() => props.onClick(props.value)}
             pad='xsmall'
             round='xsmall'
         >

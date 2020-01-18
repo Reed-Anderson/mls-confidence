@@ -90,7 +90,7 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
 
     /* Returns the given content wrapped in a Box */
     const wrappedContent = () => (
-        <Box align='center' fill justify='center' overflow='auto'>
+        <Box align='center' fill overflow='auto'>
             {content}
         </Box>
     );

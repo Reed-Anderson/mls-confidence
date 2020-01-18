@@ -1,4 +1,11 @@
 week3 = {
+    'dueDate': {
+        'year': 2020,
+        'month': 3,
+        'date': 14,
+        'hour': 10,
+        'minute': 30
+    },
     'games': [
         {
             'home': 'NYC',
@@ -82,7 +89,7 @@ week3 = {
             'minute': 30
         },
         {
-            'home': 'HOU',
+            'home': 'HO',
             'away': 'SEA',
             'year': 2020,
             'month': 3,

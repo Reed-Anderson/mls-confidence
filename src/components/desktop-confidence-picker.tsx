@@ -22,6 +22,12 @@ const propsAreEqual = (a: Props, b: Props) => (
 /* Confidence Picker on desktop */
 const DesktopConfidencePicker = React.memo((props: Props) => {
 
+    /* useCallback to avoid unnecessary rerenders */
+    const setConfidence = React.useCallback(
+        (number) => props.setConfidence(number),
+        []
+    );
+
     /* Determine if a number is active, dim, or normal */
     const getToggleBoxStatus = (num: number): 'normal' | 'dim' | 'active' => {
         if (num === props.selectedNumber) {
@@ -52,13 +58,6 @@ const DesktopConfidencePicker = React.memo((props: Props) => {
                 Confidence:
             </Text>
             {props.allNumbers.map(number => {
-
-                /* useCallback to avoid unnecessary rerenders */
-                const setConfidence = React.useCallback(
-                    () => props.setConfidence(number),
-                    []
-                );
-                
                 return (
                     <ToggleBox
                         key={number}

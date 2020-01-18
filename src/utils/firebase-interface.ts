@@ -1,6 +1,7 @@
 import * as FireBase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import { GamePick } from '../views/pick';
 
 /**
  * These values are stored in var.env (git ignored)
@@ -61,6 +62,9 @@ class Firebase {
                         this.DataMap.set(docPath, data);
                         resolve(data);
                     }
+                    else {
+                        reject();
+                    }
                 },
                 (error) => {
                     console.log(error);
@@ -75,7 +79,52 @@ class Firebase {
     }
 
     /***
-     * Public Functions
+     * Listeners
+     **/
+
+    /* Remove all listeners */
+    terminate = () => this._app.firestore().terminate();
+    
+    /***
+     * Weeks and Picks
+     **/
+
+    /* Returns promise of the given week in the database */
+    requestWeek = (
+        weekNumber: number
+    ): Promise<[
+        FireBase.firestore.DocumentData,
+        FireBase.firestore.DocumentData
+    ]> => {
+        const weekPath = `weeks/${weekNumber}`;
+        const weekPromise = new Promise((resolve, reject) => {
+            this.handleRef(weekPath, resolve, reject);
+        });
+
+        const uid = this._app.auth().currentUser?.uid;
+        const pPath = `weeks/${weekNumber}/picks/${uid}`;
+        const pickPromise = new Promise(resolve => {
+            this.handleRef(pPath, resolve, resolve);
+        });
+
+        return Promise.all([weekPromise, pickPromise]);
+    }
+
+    /* Write the given picks for the current user at the given week */
+    writePicks = ( weekNumber: number, picks: GamePick[] ): Promise<void> => {
+        const dbPicks = picks.map(pick => ({
+            awayGoals: pick.AwayGoals,
+            homeGoals: pick.HomeGoals,
+            confidence: pick.Confidence
+        }));
+        const docRef = this._app.firestore().doc(
+            `weeks/${weekNumber}/picks/${this._app.auth().currentUser.uid}`
+        );
+        return docRef.set({ picks: dbPicks });
+    }
+
+    /***
+     * Authentication
      **/
 
     /* Create a user with email and password */
@@ -91,31 +140,6 @@ class Firebase {
     /* Get the currently signed in user */
     getCurrentUser = () => {
         return this._app.auth().currentUser;
-    }
-
-    /* Remove all listeners */
-    terminate = () => this._app.firestore().terminate();
-
-    /**
-     * Returns promise of the given team in the database
-     */
-    requestTeams = (): Promise<FireBase.firestore.DocumentData> => {
-        return new Promise((resolve, reject) => {
-            const docPath = 'maps/teams';
-            this.handleRef(docPath, resolve, reject);
-        });
-    }
-
-    /**
-     * Returns promise of the given week in the database
-     */
-    requestWeek = (
-        weekNumber: number
-    ): Promise<FireBase.firestore.DocumentData> => {
-        return new Promise((resolve, reject) => {
-            const docPath = `weeks/${weekNumber}`;
-            this.handleRef(docPath, resolve, reject);
-        });
     }
 
     /* Send an email to reset a user's password */

@@ -6,6 +6,7 @@ import DesktopConfidencePicker from './desktop-confidence-picker';
 import { GamePick } from '../views/pick';
 import { arraysEqual } from '../utils/helpers';
 import MobileConfidencePicker from './mobile-confidence-picker';
+import GrowDiv from './grow-div';
 
 /* Props for the component */
 interface Props extends GamePick {
@@ -78,9 +79,7 @@ const GamePicker = React.memo((props: Props) => {
                                 score={props.HomeGoals}
                                 teamName={props.HomeName}
                             />
-                            {size !== 'small' && (
-                                <div style={{ flexGrow: 1 }} />
-                            )}
+                            {size !== 'small' && <GrowDiv />}
                             <TeamScorePicker
                                 labelOnLeft={size === 'small'}
                                 onChange={props.setAwayGoals}

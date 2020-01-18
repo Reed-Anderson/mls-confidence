@@ -51,3 +51,13 @@ export const arraysEqual = (a: any[], b: any[]) => {
 
     return true;
 }
+
+export const dateToString = (date: Date) => {
+    const timeFormat: Intl.DateTimeFormatOptions = {
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+    };
+    return date.toLocaleTimeString('en-US', timeFormat);
+}
