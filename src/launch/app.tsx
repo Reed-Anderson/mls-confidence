@@ -23,6 +23,11 @@ const theme = {
         input: {
             weight: 400
         }
+    },
+    button: {
+        border: {
+            radius: '12px'
+        }
     }
 };
 
