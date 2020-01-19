@@ -8,6 +8,7 @@ import GamePicker from '../components/game-picker';
 import { TeamID, TeamLookup } from '../utils/team-lookup';
 import SaveRow from '../components/save-row';
 import { dateToString } from '../utils/helpers';
+import PageLoader from '../components/page-loader';
 
 /* Interface for picking a single game */
 export interface GamePick {
@@ -163,8 +164,9 @@ const PickView = () => {
      * Render Pick view
      ***********************/
      return (
-        <Box height={{ min: 'fit-content' }}>
+        <Box align='center' fill height={{ min: 'fit-content' }}>
             <ViewTitle title={`Picks for Week ${weekNumber}!`} />
+            <PageLoader loading={!picks.length} />
             {picks.map((pick: GamePick, index: number) => {
                 return (
                     <GamePicker

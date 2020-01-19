@@ -24,6 +24,7 @@ const SaveRow = (props: Props) => {
                     margin={{ bottom: 'medium' }}
                     pad='small'
                     round='small'
+                    width={size === 'small' ? 'fit-content' : '675px'}
                 >
                     <Text>
                         Picks are due <b>{props.dueDate}</b>.
