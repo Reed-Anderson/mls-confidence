@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Box, Button } from 'grommet';
 import Headered from '../hocs/headered';
-import PlainLink from '../components/plain-link';
+import { useHistory } from 'react-router-dom';
 
 /* Component for the error page */
 const ErrorView = () => {
+    const history = useHistory();
     return (
         <Box
             align='center'
@@ -15,11 +16,10 @@ const ErrorView = () => {
         >
             <h1>Error 404</h1>
             <p>Page not found</p>
-            <PlainLink to='/'>
-                <Button
-                    label='Go Home'
-                />
-            </PlainLink>
+            <Button
+                label='Go Back'
+                onClick={() => history.goBack()}
+            />
         </Box>
     );
 };

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Heading, HeadingProps, Text } from 'grommet';
+import { Heading, HeadingProps, Text, ResponsiveContext } from 'grommet';
 
 /* Interface for props needed for the ViewTitle component */
 export interface ViewTitleProps {
@@ -26,26 +26,34 @@ const StyledViewTitle = styled(Heading) <StyledViewTitleProps>`
  * The returned ViewTitle
  */
 const ViewTitle = (props: ViewTitleProps) => (
-    <>
-        <StyledViewTitle
-            level={2}
-            marginTop={props.pushFromTop ? '100px' : undefined}
-        >
-            {props.title}
-        </StyledViewTitle>
-        {props.secondaryTitle && (
-            <Text
-                margin={{
-                    top: '0',
-                    bottom: props.pushFromTop ? '50px' : '30px'
-                }}
-                size='small'
-                textAlign='center'
-            >
-                {props.secondaryTitle}
-            </Text>
-        )}
-    </>
+    <ResponsiveContext.Consumer>
+        {size => {
+            const pushFromTop = size !== 'small' && props.pushFromTop;
+            return (
+                <>
+                    <StyledViewTitle
+                        color='dark-2'
+                        level={2}
+                        marginTop={pushFromTop ? '100px' : undefined}
+                    >
+                        {props.title}
+                    </StyledViewTitle>
+                    {props.secondaryTitle && (
+                        <Text
+                            margin={{
+                                top: '0',
+                                bottom: pushFromTop ? '50px' : '30px'
+                            }}
+                            size='small'
+                            textAlign='center'
+                        >
+                            {props.secondaryTitle}
+                        </Text>
+                    )}
+                </>
+            );
+        }}
+    </ResponsiveContext.Consumer>
 );
 
 export default ViewTitle;

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Box, ResponsiveContext, Text } from 'grommet';
-import { COLORS } from '../utils/constants';
 import TeamScorePicker from './team-score-picker';
 import DesktopConfidencePicker from './desktop-confidence-picker';
 import { GamePick } from '../views/pick';
@@ -46,8 +45,7 @@ const GamePicker = React.memo((props: Props) => {
     };
 
     /* Variable for the border color of the GamePicker */
-    const borderColor = props.Confidence ?
-        COLORS['brand'] : COLORS['status-warning']
+    const borderColor = props.Confidence ? 'brand' : 'status-warning'
 
     /* Return Game Picker component */
     return (

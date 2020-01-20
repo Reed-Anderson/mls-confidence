@@ -65,7 +65,7 @@ const App = () => {
                         <Route
                             exact
                             component={LoginView}
-                            path='/logIn'
+                            path='/login'
                         />
                         <Route
                             exact

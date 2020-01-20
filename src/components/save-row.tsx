@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Button, Text, ResponsiveContext } from 'grommet';
 import { Add } from 'grommet-icons';
-import { COLORS } from '../utils/constants';
 import GrowDiv from './grow-div';
 
 /* Props for the component */
@@ -18,7 +17,7 @@ const SaveRow = (props: Props) => {
             {size => (
                 <Box
                     align='center'
-                    background={COLORS["light-3"]}
+                    background={'light-3'}
                     direction={size === 'small' ? 'column' : 'row'}
                     height='fit-content'
                     margin={{ bottom: 'medium' }}
@@ -40,7 +39,7 @@ const SaveRow = (props: Props) => {
                 </Box>
             )}
         </ResponsiveContext.Consumer>
-    )
+    );
 };
 
 export default SaveRow;

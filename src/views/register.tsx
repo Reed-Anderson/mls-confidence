@@ -125,7 +125,7 @@ const RegisterView = () => {
     /* Return the register view */
     return (
         <Box as='div' align='center' fill>
-            <ViewTitle title='Create a New Account!' />
+            <ViewTitle pushFromTop title='Create a New Account!' />
             <Box width='medium'>
                 <Form
                     onChange={onChange}

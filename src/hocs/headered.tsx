@@ -47,7 +47,7 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
             { displayName: 'Standings', linkTo: '/standings' },
             {
                 displayName: 'Log Out',
-                linkTo: '/logIn',
+                linkTo: '/login',
                 onClick: () => firebase.signOutUser()
             }
         ]
@@ -55,10 +55,10 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
         [
             { displayName: 'Home', linkTo: '/' },
             { displayName: 'About', linkTo: '/about' },
-            { displayName: 'Log In', linkTo: '/logIn' },
+            { displayName: 'Log In', linkTo: '/login' },
             { displayName: 'Register', linkTo: '/register' },
             { displayName: 'Standings', linkTo: '/standings' }
-        ]
+        ];
 
     /* Rendering constants */
     const pad = { left: 'medium', right: 'small', vertical: 'small' };

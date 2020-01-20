@@ -3,16 +3,17 @@ import { Box, ResponsiveContext } from 'grommet';
 import Headered from '../hocs/headered';
 import ViewTitle from '../components/view-title';
 import LoginStatusBox from '../components/login-status-box';
-import { COLORS } from '../utils/constants';
 import TitledFloatBox from '../components/titled-float-box';
 import { getCurrentWeek } from '../utils/helpers';
+import PickStatusBox from '../components/pick-status-box';
+import AboutPageBox from '../components/about-page-box';
 
-const secondaryTitle = `Test your knowledge (or luck!) of
-                        MLS against experts, friends, and strangers.`;
+const secondaryTitle = `Test your knowledge (or luck!) of Major League
+                        Soccer against experts, friends, and strangers.`;
 
 const TitledFloatBoxProps = {
     gap: 'small',
-    margin: { bottom: 'medium' },
+    margin: 'medium',
     pad: 'small',
     height: '350px',
     width: '300px'
@@ -25,36 +26,50 @@ const HomeView = () => {
     return (
         <ResponsiveContext.Consumer>
             {size => (
-                <Box align='center' overflow='auto' pad={{ horizontal: 'small' }}>
+                <Box
+                    align='center'
+                    overflow='auto'
+                    pad={{ horizontal: 'small' }}
+                >
                     <ViewTitle
-                        pushFromTop={size !== 'small'}
+                        pushFromTop
                         secondaryTitle={secondaryTitle}
                         title='Welcome to the MLS Confidence Pool!'
                     />
-                    <LoginStatusBox />
                     <Box
-                        direction={size === 'small' ? 'column' : 'row'}
-                        gap='large'
+                        direction='row'
+                        justify='center'
                         pad='small'
+                        width={{ max: '1075px' }}
+                        wrap
                     >
+                        <AboutPageBox />
+                        <LoginStatusBox />
+                        <PickStatusBox />
                         <TitledFloatBox
                             boxProps={TitledFloatBoxProps}
-                            color={COLORS["neutral-1"]}
+                            color='neutral-1'
+                            loading
                             title={`Last Week's Results`}
                             to={`/results/${getCurrentWeek() - 1}`}
-                        />
+                        >
+                        </TitledFloatBox>
                         <TitledFloatBox
                             boxProps={TitledFloatBoxProps}
-                            color={COLORS["neutral-3"]}
+                            color='neutral-3'
+                            loading
                             title='Total Point Leaders'
                             to='/standings'
-                        />
+                        >
+                        </TitledFloatBox>
                         <TitledFloatBox
                             boxProps={TitledFloatBoxProps}
-                            color={COLORS["neutral-4"]}
+                            color='neutral-4'
+                            loading
                             title='Weekly Win Leaders'
                             to='/standings/weekly'
-                        />
+                        >
+                        </TitledFloatBox>
                     </Box>
                 </Box>
             )}

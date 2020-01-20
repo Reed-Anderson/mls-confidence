@@ -66,7 +66,7 @@ const LoginView = () => {
     /* Return the login view */
     return (
         <Box as='div' fill align='center'>
-            <ViewTitle title='Log in to your account!' />
+            <ViewTitle pushFromTop title='Log in to your account!' />
             <Box width='medium'>
                 <Form
                     onChange={onChange}
