@@ -18,6 +18,9 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
+/* Type alias to shorten name */
+type DocumentData = FireBase.firestore.DocumentData
+
 /**
  * Class to initialize database and authentication context
  */
@@ -35,7 +38,7 @@ class Firebase {
     /***
      * Public Variables
      **/
-    DataMap: Map<string, FireBase.firestore.DocumentData> = new Map();
+    DataMap: Map<string, DocumentData> = new Map();
 
     /* Private variables */
     private _app: FireBase.app.App;
@@ -47,7 +50,7 @@ class Firebase {
     /* Handle a snapshot of a Document reference */
     private handleRef = (
         docPath: string,
-        resolve: (data: FireBase.firestore.DocumentData) => void,
+        resolve: (data: DocumentData) => void,
         reject: () => void
     ) => {
 
@@ -84,34 +87,26 @@ class Firebase {
 
     /* Remove all listeners */
     terminate = () => this._app.firestore().terminate();
-    
+
     /***
      * Weeks and Picks
      **/
 
     /* Returns promise of the given week in the database */
-    requestWeek = (
-        weekNumber: number
-    ): Promise<[
-        FireBase.firestore.DocumentData,
-        FireBase.firestore.DocumentData
-    ]> => {
+    requestWeek = (weekNumber: number): Promise<DocumentData> => {
         const weekPath = `weeks/${weekNumber}`;
-        const weekPromise = new Promise((resolve, reject) => {
-            this.handleRef(weekPath, resolve, reject);
-        });
+        return new Promise(res => this.handleRef(weekPath, res, res));
+    }
 
+    /* Returns promise of the given week's picks in the database */
+    requestWeekPick = (weekNumber: number): Promise<DocumentData> => {
         const uid = this._app.auth().currentUser?.uid;
-        const pPath = `weeks/${weekNumber}/picks/${uid}`;
-        const pickPromise = new Promise(resolve => {
-            this.handleRef(pPath, resolve, resolve);
-        });
-
-        return Promise.all([weekPromise, pickPromise]);
+        const pickPath = `weeks/${weekNumber}/picks/${uid}`;
+        return new Promise(res => this.handleRef(pickPath, res, res));
     }
 
     /* Write the given picks for the current user at the given week */
-    writePicks = ( weekNumber: number, picks: GamePick[] ): Promise<void> => {
+    writePicks = (weekNumber: number, picks: GamePick[]): Promise<void> => {
         const dbPicks = picks.map(pick => ({
             awayGoals: pick.AwayGoals,
             homeGoals: pick.HomeGoals,
@@ -145,6 +140,11 @@ class Firebase {
     /* Send an email to reset a user's password */
     sendPasswordReset = (email: string) => {
         this._app.auth().sendPasswordResetEmail(email);
+    }
+
+    /* Set a listener on the change of auth state */
+    setAuthStateUpdate = (callback: () => void) => {
+        this._app.auth().onAuthStateChanged(callback);
     }
 
     /* Sign in a user with email and password */

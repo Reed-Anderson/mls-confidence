@@ -6,12 +6,12 @@ import PlainLink from './plain-link';
 
 /* Additional props for the FloatBox */
 const boxProps: BoxProps = {
-        gap: 'medium',
+    gap: 'medium',
     height: { min: 'auto', max: 'auto' },
     margin: 'medium',
     pad: 'medium',
     width: '300px',
-}
+};
 
 /**
  * FloatBox component to show that the user is logged in

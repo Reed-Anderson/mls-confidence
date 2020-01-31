@@ -38,37 +38,36 @@ const PickView = () => {
     /************************
      * State
      ***********************/
-    
+
     /* Store due date returned from firebase */
     const [dueDate, setDueDate] = React.useState('Due Date Unknown');
-    
+
     /* State for picks returned from firebase and modified by user */
     const [picks, setPicks] = React.useState([] as GamePick[]);
 
     /************************
      * Picks
      ***********************/
-    
+
     /**
      * On init, promise the week then handle picks
      */
     React.useEffect(() => {
         const weekPromise = firebase.requestWeek(parseInt(weekNumber));
-        weekPromise.then(([week, picks]) => {
+        const pickPromise = firebase.requestWeekPick(parseInt(weekNumber));
+        Promise.all([weekPromise, pickPromise]).then(([week, picks]) => {
             setDueDate(dateToString(new Date(week.dueDate?.seconds * 1000)));
             const gamePicks: GamePick[] = week?.games?.map(
                 (game: any, index: number) => {
                     const kickoff = new Date(game.kickoff?.seconds * 1000);
                     const homeId: TeamID = game['home'];
                     const awayId: TeamID = game['away'];
-                    const homeName = TeamLookup[homeId].name;
-                    const awayName = TeamLookup[awayId].name;
                     return {
                         AwayGoals: picks?.picks[index]?.awayGoals || 0,
-                        AwayName: awayName,
+                        AwayName: TeamLookup[awayId].name,
                         Confidence: picks?.picks[index]?.confidence,
                         HomeGoals: picks?.picks[index]?.homeGoals || 0,
-                        HomeName: homeName,
+                        HomeName: TeamLookup[homeId].name,
                         Kickoff: dateToString(kickoff)
                     };
                 }
@@ -163,7 +162,7 @@ const PickView = () => {
     /************************
      * Render Pick view
      ***********************/
-     return (
+    return (
         <Box align='center' fill height={{ min: 'fit-content' }}>
             <ViewTitle title={`Picks for Week ${weekNumber}!`} />
             <PageLoader loading={!picks.length} />
