@@ -41,7 +41,7 @@ const DesktopConfidencePicker = React.memo((props: Props) => {
         }
     }
 
-    /* Display all numbers with a "Confidence" label */
+    /* Display all numbers with a 'Confidence' label */
     return (
         <Box
             alignContent='center'

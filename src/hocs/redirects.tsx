@@ -23,7 +23,7 @@ export const LoginRequired = (content: JSX.Element) => {
     const firebase = React.useContext(FirebaseContext);
 
     if (!firebase.getCurrentUser()) {
-        return <Redirect to='/' />;
+        return <Redirect to='/login' />;
     }
     else {
         return content;

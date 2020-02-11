@@ -80,7 +80,7 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
             style={{ zIndex: 1 }}
         >
             <Heading level='3' margin='none'>
-                <MainLink to="/">
+                <MainLink to='/'>
                     {APP_NAME}
                 </MainLink>
             </Heading>

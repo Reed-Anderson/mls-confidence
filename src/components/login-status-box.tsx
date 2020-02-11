@@ -7,7 +7,7 @@ import PlainLink from './plain-link';
 /* Additional props for the FloatBox */
 const boxProps: BoxProps = {
     gap: 'medium',
-    height: { min: 'auto', max: 'auto' },
+    height: '150px',
     margin: 'medium',
     pad: 'medium',
     width: '300px',
@@ -21,19 +21,19 @@ const LoginStatusBox = () => {
     return (
         <FloatBox boxProps={boxProps}>
             <Box direction='row' gap='xsmall'>
-                <Icon.Alert color="status-warning" />
+                <Icon.Alert color='status-warning' />
                 <Text weight='bold'>You are not logged in!</Text>
             </Box>
             <Box align='center' direction='row' fill justify='around'>
                 <PlainLink to='/register'>
                     <Button
-                        color={'accent-4'}
+                        color='accent-4'
                         label='Sign Up!'
                     />
                 </PlainLink>
                 <PlainLink to='/login'>
                     <Button
-                        color={'accent-1'}
+                        color='accent-1'
                         label='Log In!'
                     />
                 </PlainLink>

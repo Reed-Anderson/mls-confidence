@@ -6,7 +6,7 @@ import LoginStatusBox from '../components/login-status-box';
 import TitledFloatBox from '../components/titled-float-box';
 import { getCurrentWeek } from '../utils/helpers';
 import PickStatusBox, { PickStatus } from '../components/pick-status-box';
-import AboutPageBox from '../components/about-page-box';
+import ConfusedBox from '../components/confused-box';
 import { FirebaseContext } from '../launch/app';
 
 const secondaryTitle = `Test your knowledge (or luck!) of Major League
@@ -55,7 +55,7 @@ const HomeView = () => {
                 width={{ max: '1075px' }}
                 wrap
             >
-                <AboutPageBox />
+                <ConfusedBox />
                 <LoginStatusBox />
                 <PickStatusBox
                     pickStatus={pickStatus}

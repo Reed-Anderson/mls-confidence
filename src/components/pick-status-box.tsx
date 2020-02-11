@@ -3,7 +3,6 @@ import * as Icon from 'grommet-icons';
 import FloatBox from './float-box';
 import PulseLoader from 'react-spinners/PropagateLoader';
 import { Box, BoxProps, Text, Button } from 'grommet';
-import { getCurrentWeek } from '../utils/helpers';
 import { COLORS } from '../utils/constants';
 import PlainLink from './plain-link';
 
@@ -52,7 +51,7 @@ const PickStatusBox = (props: Props) => {
                     <PlainLink to={`/pick/${props.weekNumber}`}>
                         <Button
                             color={COLORS['status-warning']}
-                            label="Picks Incomplete!"
+                            label='Picks Incomplete!'
                         />
                     </PlainLink>
                 )}
@@ -60,7 +59,7 @@ const PickStatusBox = (props: Props) => {
                     <PlainLink to={`/pick/${props.weekNumber}`}>
                         <Button
                             color={COLORS['status-ok']}
-                            label="Picks Complete!"
+                            label='Picks Complete!'
                         />
                     </PlainLink>
                 )}

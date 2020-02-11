@@ -9,6 +9,7 @@ import { TeamID, TeamLookup } from '../utils/team-lookup';
 import SaveRow from '../components/save-row';
 import { dateToString } from '../utils/helpers';
 import PageLoader from '../components/page-loader';
+import { LoginRequired } from '../hocs/redirects';
 
 /* Interface for picking a single game */
 export interface GamePick {
@@ -190,4 +191,4 @@ const PickView = () => {
     );
 };
 
-export default () => Headered(PickView(), 'Pick');
+export default () => LoginRequired(Headered(PickView(), 'Pick'));

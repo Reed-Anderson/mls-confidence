@@ -32,7 +32,7 @@ const SaveRow = (props: Props) => {
                     <Button
                         disabled={props.disableSave}
                         icon={<Add />}
-                        label="Save"
+                        label='Save'
                         margin={size === 'small' ? { top: 'small' } : undefined}
                         onClick={props.onSave}
                     />
