@@ -13,6 +13,7 @@ import { FirebaseContext } from '../launch/app';
 import SidebarOption from '../components/sidebar-option';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { getCurrentWeek } from '../utils/helpers';
 
 /**
  * Main Link
@@ -42,8 +43,9 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
     const sidebarItems = firebase.getCurrentUser() ?
         [
             { displayName: 'Home', linkTo: '/' },
+            { displayName: 'Rules', linkTo: '/rules' },
             { displayName: 'About', linkTo: '/about' },
-            { displayName: 'Pick', linkTo: '/pick/1' },
+            { displayName: 'Pick', linkTo: `/pick/${getCurrentWeek()}` },
             { displayName: 'Standings', linkTo: '/standings' },
             {
                 displayName: 'Log Out',
@@ -54,6 +56,7 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
         :
         [
             { displayName: 'Home', linkTo: '/' },
+            { displayName: 'Rules', linkTo: '/rules' },
             { displayName: 'About', linkTo: '/about' },
             { displayName: 'Log In', linkTo: '/login' },
             { displayName: 'Register', linkTo: '/register' },

@@ -14,9 +14,9 @@ const secondaryTitle = `Test your knowledge (or luck!) of Major League
 
 const TitledFloatBoxProps = {
     gap: 'small',
+    height: '350px',
     margin: 'medium',
     pad: 'small',
-    height: '350px',
     width: '300px'
 }
 

@@ -22,7 +22,7 @@ const ConfusedBox = () => {
                 <Text weight='bold'>Confused?</Text>
             </Box>
             <Box align='center' direction='row' fill justify='around'>
-                <PlainLink to='about'>
+                <PlainLink to='rules'>
                     <Button
                         color='accent-4'
                         label='Rules'

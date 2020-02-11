@@ -6,6 +6,7 @@ import RegisterView from '../views/register';
 import StandingsView from '../views/standings';
 import PickView from '../views/pick';
 import ErrorView from '../views/error';
+import RulesView from '../views/rules';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Grommet } from 'grommet';
 import { COLORS } from '../utils/constants';
@@ -63,6 +64,11 @@ const App = () => {
                                 exact
                                 component={AboutView}
                                 path='/about'
+                            />
+                            <Route
+                                exact
+                                component={RulesView}
+                                path='/rules'
                             />
                             <Route
                                 exact
