@@ -30,7 +30,7 @@ const ConfusedBox = () => {
                 </PlainLink>
                 <PlainLink to='about'>
                     <Button
-                        color='accent-1'
+                        color='brand'
                         label='About'
                     />
                 </PlainLink>

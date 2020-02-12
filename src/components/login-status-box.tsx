@@ -33,7 +33,7 @@ const LoginStatusBox = () => {
                 </PlainLink>
                 <PlainLink to='/login'>
                     <Button
-                        color='accent-1'
+                        color='brand'
                         label='Log In!'
                     />
                 </PlainLink>
