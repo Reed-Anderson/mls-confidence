@@ -10,6 +10,7 @@ import SaveRow from '../components/save-row';
 import { dateToString } from '../utils/helpers';
 import PageLoader from '../components/page-loader';
 import { LoginRequired } from '../hocs/redirects';
+import WeekPicker from '../components/week-picker';
 
 /* Interface for picking a single game */
 export interface GamePick {
@@ -160,12 +161,24 @@ const PickView = () => {
      */
     const saveFn = () => firebase.writePicks(parseInt(weekNumber), picks);
 
+    /**
+     * Reset picks and due date
+     */
+    const reset = () => {
+        setPicks([]);
+        setDueDate('Due Date Unknown');
+    };
+
     /************************
      * Render Pick view
      ***********************/
     return (
         <Box align='center' fill height={{ min: 'fit-content' }}>
             <ViewTitle title={`Picks for Week ${weekNumber}!`} />
+            <WeekPicker
+                onSelect={reset}
+                weekNumber={parseInt(weekNumber)}
+            />
             <PageLoader loading={!picks.length} />
             {picks.map((pick: GamePick, index: number) => {
                 return (
