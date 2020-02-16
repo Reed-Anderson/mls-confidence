@@ -1,15 +1,13 @@
 {
-  "name": "mls",
+  "name": "mls-confidence-pool",
   "version": "1.0.0",
-  "description": "",
+  "description": "A confidence pool for the MLS 2020 season.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open --config webpack.dev.ts",
     "build": "webpack --mode production --config webpack.prod.ts"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Reed Anderson",
   "license": "UNLICENSED",
   "dependencies": {
     "firebase": "^7.6.1",

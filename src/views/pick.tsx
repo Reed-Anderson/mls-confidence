@@ -47,6 +47,9 @@ const PickView = () => {
     /* State for picks returned from firebase and modified by user */
     const [picks, setPicks] = React.useState([] as GamePick[]);
 
+    /* State to store whether the pick sheet has been edited */
+    const [wasEdited, setWasEdited] = React.useState(false);
+
     /************************
      * Picks
      ***********************/
@@ -91,6 +94,7 @@ const PickView = () => {
             }
             return pick;
         }));
+        setWasEdited(true);
     };
 
     /**
@@ -110,6 +114,7 @@ const PickView = () => {
             }
             return pick;
         }));
+        setWasEdited(true);
     };
 
     /**
@@ -125,6 +130,7 @@ const PickView = () => {
             }
             return pick;
         }));
+        setWasEdited(true);
     };
 
     /************************
@@ -159,15 +165,24 @@ const PickView = () => {
     /**
      * Save the week to firebase
      */
-    const saveFn = () => firebase.writePicks(parseInt(weekNumber), picks);
+    const saveFn = () => {
+        firebase.writePicks(parseInt(weekNumber), picks);
+        setWasEdited(false);
+    }
 
     /**
      * Reset picks and due date
      */
     const reset = () => {
         setPicks([]);
+        setWasEdited(false);
         setDueDate('Due Date Unknown');
     };
+
+    /************************
+     * Render Consts
+     ***********************/
+    const disableSave = allNumbers.length !== usedNumbers.length || !wasEdited
 
     /************************
      * Render Pick view
@@ -195,7 +210,7 @@ const PickView = () => {
             })}
             {!!picks.length && (
                 <SaveRow
-                    disableSave={allNumbers.length !== usedNumbers.length}
+                    disableSave={disableSave}
                     dueDate={dueDate}
                     onSave={saveFn}
                 />
