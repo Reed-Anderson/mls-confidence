@@ -1,8 +1,10 @@
 import * as React from 'react';
-import * as Icon from 'grommet-icons';
 import { Box, Text, Button, BoxProps } from 'grommet';
 import FloatBox from './float-box';
 import PlainLink from './plain-link';
+import { Alert, UserExpert } from 'grommet-icons';
+import { FirebaseContext } from '../launch/app';
+import { useHistory } from 'react-router-dom';
 
 /* Additional props for the FloatBox */
 const boxProps: BoxProps = {
@@ -18,28 +20,58 @@ const boxProps: BoxProps = {
  *  or prompt them to do so
  */
 const LoginStatusBox = () => {
-    return (
-        <FloatBox boxProps={boxProps}>
-            <Box direction='row' gap='xsmall'>
-                <Icon.Alert color='status-warning' />
-                <Text weight='bold'>You are not logged in!</Text>
-            </Box>
-            <Box align='center' direction='row' fill justify='around'>
-                <PlainLink to='/register'>
+
+    /* Firebase context for active user */
+    const firebase = React.useContext(FirebaseContext);
+    const currentUser = firebase.getCurrentUser();
+
+    /* History context to push /login */
+    const history = useHistory();
+
+    /* Function to handle log out click */
+    const handleLogOut = () => {
+        firebase.signOutUser().then(() => {
+            history.push('/login')
+        });
+    };
+
+    if (currentUser) {
+        return (
+            <FloatBox boxProps={boxProps}>
+                <Box direction='row' gap='xsmall'>
+                    <UserExpert color='status-ok' />
+                    <Text weight='bold'>
+                        Signed in as {currentUser.displayName || 'User'}.
+                    </Text>
+                </Box>
+                <Box align='center' direction='row' fill justify='around'>
                     <Button
-                        color='accent-4'
-                        label='Sign Up!'
+                        color='status-warning'
+                        label='Log out'
+                        onClick={handleLogOut}
                     />
-                </PlainLink>
-                <PlainLink to='/login'>
-                    <Button
-                        color='brand'
-                        label='Log In!'
-                    />
-                </PlainLink>
-            </Box>
-        </FloatBox>
-    );
+                </Box>
+            </FloatBox>
+        );
+    }
+    else {
+        return (
+            <FloatBox boxProps={boxProps}>
+                <Box direction='row' gap='xsmall'>
+                    <Alert color='status-warning' />
+                    <Text weight='bold'>You are not logged in!</Text>
+                </Box>
+                <Box align='center' direction='row' fill justify='around'>
+                    <PlainLink to='/register'>
+                        <Button color='accent-4' label='Register!' />
+                    </PlainLink>
+                    <PlainLink to='/login'>
+                        <Button color='brand' label='Log In!' />
+                    </PlainLink>
+                </Box>
+            </FloatBox>
+        );
+    }
 };
 
 export default LoginStatusBox;
