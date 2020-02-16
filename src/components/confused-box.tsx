@@ -6,7 +6,6 @@ import PlainLink from './plain-link';
 
 /* Extra properties for the FloatBox */
 const boxProps: BoxProps = {
-    gap: 'small',
     height: '150px',
     margin: 'medium',
     pad: 'medium',
@@ -17,20 +16,25 @@ const boxProps: BoxProps = {
 const ConfusedBox = () => {
     return (
         <FloatBox boxProps={boxProps}>
-            <Box direction='row' gap='xsmall'>
+            <Box
+                direction='row'
+                flex={{ shrink: 0 }}
+                gap='xsmall'
+                height='45px'
+            >
                 <Icon.CircleInformation color='brand' />
                 <Text weight='bold'>Confused?</Text>
             </Box>
             <Box align='center' direction='row' fill justify='around'>
                 <PlainLink to='rules'>
                     <Button
-                        color='accent-4'
+                        active
                         label='Rules'
                     />
                 </PlainLink>
                 <PlainLink to='about'>
                     <Button
-                        color='brand'
+                        active
                         label='About'
                     />
                 </PlainLink>

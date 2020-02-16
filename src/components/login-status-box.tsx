@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom';
 
 /* Additional props for the FloatBox */
 const boxProps: BoxProps = {
-    gap: 'medium',
     height: '150px',
     margin: 'medium',
     pad: 'medium',
@@ -39,7 +38,12 @@ const LoginStatusBox = () => {
     if (currentUser) {
         return (
             <FloatBox boxProps={boxProps}>
-                <Box direction='row' gap='xsmall'>
+                <Box
+                    direction='row'
+                    flex={{ shrink: 0 }}
+                    gap='xsmall'
+                    height='45px'
+                >
                     <UserExpert color='status-ok' />
                     <Text weight='bold'>
                         Signed in as {userName}.
@@ -58,16 +62,21 @@ const LoginStatusBox = () => {
     else {
         return (
             <FloatBox boxProps={boxProps}>
-                <Box direction='row' gap='xsmall'>
+                <Box
+                    direction='row'
+                    flex={{ shrink: 0 }}
+                    gap='xsmall'
+                    height='45px'
+                >
                     <Alert color='status-warning' />
                     <Text weight='bold'>You are not logged in!</Text>
                 </Box>
                 <Box align='center' direction='row' fill justify='around'>
                     <PlainLink to='/register'>
-                        <Button color='accent-4' label='Register!' />
+                        <Button active label='Register!' />
                     </PlainLink>
                     <PlainLink to='/login'>
-                        <Button color='brand' label='Log In!' />
+                        <Button active label='Log In!' />
                     </PlainLink>
                 </Box>
             </FloatBox>

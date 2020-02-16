@@ -40,6 +40,7 @@ const ViewTitle = (props: ViewTitleProps) => (
                     </StyledViewTitle>
                     {props.secondaryTitle && (
                         <Text
+                            color='dark-3'
                             margin={{
                                 top: '0',
                                 bottom: pushFromTop ? '50px' : '30px'

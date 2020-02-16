@@ -1,16 +1,15 @@
 import * as React from 'react';
-import * as Icon from 'grommet-icons';
 import FloatBox from './float-box';
 import PulseLoader from 'react-spinners/PropagateLoader';
 import { Box, BoxProps, Text, Button } from 'grommet';
 import { COLORS } from '../utils/constants';
 import PlainLink from './plain-link';
+import { Clock } from 'grommet-icons';
 
 /**
  * BoxProps on the PickStatusBox
  */
 const boxProps: BoxProps = {
-    gap: 'medium',
     height: '150px',
     margin: 'medium',
     pad: 'medium',
@@ -37,10 +36,19 @@ interface Props {
 /* PickStatusBox Component */
 const PickStatusBox = (props: Props) => {
 
+    /* Color of the clock icon */
+    const iconColor = props.pickStatus === PickStatus.Incomplete ?
+        'status-warning' : 'status-ok'
+
     return (
         <FloatBox boxProps={boxProps}>
-            <Box direction='row' gap='xsmall'>
-                <Icon.Clock color='status-ok' />
+            <Box
+                direction='row'
+                flex={{ shrink: 0 }}
+                gap='xsmall'
+                height='45px'
+            >
+                <Clock color={iconColor} />
                 <Text weight='bold'>{`Week ${props.weekNumber} Picks`}</Text>
             </Box>
             <Box align='center' fill justify='center'>
@@ -50,7 +58,7 @@ const PickStatusBox = (props: Props) => {
                 {props.pickStatus === PickStatus.Incomplete && (
                     <PlainLink to={`/pick/${props.weekNumber}`}>
                         <Button
-                            color={COLORS['status-warning']}
+                            color='status-ok'
                             label='Picks Incomplete!'
                         />
                     </PlainLink>
@@ -58,7 +66,7 @@ const PickStatusBox = (props: Props) => {
                 {props.pickStatus === PickStatus.Complete && (
                     <PlainLink to={`/pick/${props.weekNumber}`}>
                         <Button
-                            color={COLORS['status-ok']}
+                            color='status-ok'
                             label='Picks Complete!'
                         />
                     </PlainLink>
