@@ -5,6 +5,7 @@ import ViewTitle from '../components/view-title';
 import { useHistory } from 'react-router-dom';
 import { LogoutRequired } from '../hocs/redirects';
 import { FirebaseContext } from '../launch/app';
+import PlainLink from '../components/plain-link';
 
 /* Format of the data in the login form */
 interface FormState {
@@ -96,13 +97,17 @@ const LoginView = () => {
                                 {errorMessage}
                             </Text>
                         }
-                        <Button
-                            alignSelf='center'
-                            label='Submit'
-                            margin='small'
-                            primary
-                            type='submit'
-                        />
+                        <Box align='center' direction='row'>
+                            <PlainLink to='/register'>
+                                <Button label='Register' margin='small' />
+                            </PlainLink>
+                            <Button
+                                label='Log in!'
+                                margin='small'
+                                primary
+                                type='submit'
+                            />
+                        </Box>
                     </Box>
                 </Form>
             </Box>

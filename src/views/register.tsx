@@ -5,6 +5,7 @@ import ViewTitle from '../components/view-title';
 import { FirebaseContext } from '../launch/app';
 import { LogoutRequired } from '../hocs/redirects';
 import { useHistory } from 'react-router-dom';
+import PlainLink from '../components/plain-link';
 
 /* Format of the data in the register form */
 interface FormState {
@@ -184,13 +185,17 @@ const RegisterView = () => {
                                 {errorMessage}
                             </Text>
                         }
-                        <Button
-                            alignSelf='center'
-                            label='Submit'
-                            margin='small'
-                            primary
-                            type='submit'
-                        />
+                        <Box align='center' direction='row'>
+                            <PlainLink to='/login'>
+                                <Button label='Log In' margin='small' />
+                            </PlainLink>
+                            <Button
+                                label='Register!'
+                                margin='small'
+                                primary
+                                type='submit'
+                            />
+                        </Box>
                     </Box>
                 </Form>
             </Box>
