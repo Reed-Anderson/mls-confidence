@@ -24,6 +24,7 @@ const LoginStatusBox = () => {
     /* Firebase context for active user */
     const firebase = React.useContext(FirebaseContext);
     const currentUser = firebase.getCurrentUser();
+    const userName = currentUser?.displayName || 'Unknown User';
 
     /* History context to push /login */
     const history = useHistory();
@@ -41,7 +42,7 @@ const LoginStatusBox = () => {
                 <Box direction='row' gap='xsmall'>
                     <UserExpert color='status-ok' />
                     <Text weight='bold'>
-                        Signed in as {currentUser.displayName || 'User'}.
+                        Signed in as {userName}.
                     </Text>
                 </Box>
                 <Box align='center' direction='row' fill justify='around'>

@@ -42,7 +42,7 @@ type FormStateIndexer =
 const RegisterView = () => {
     /* Hook to you react router history */
     const history = useHistory();
-    
+
     /* Use custom hook for using firebase */
     const firebase = React.useContext(FirebaseContext);
 
@@ -114,7 +114,13 @@ const RegisterView = () => {
 
     /* Submit the register form */
     const submitForm = () => {
-        firebase.createUser(registerForm.Email, registerForm.Password)
+        firebase.createUser(
+            registerForm.FirstName,
+            registerForm.LastName,
+            registerForm.MobileNumber,
+            registerForm.Email,
+            registerForm.Password
+        )
             .then(() => {
                 history.push('/');
             })

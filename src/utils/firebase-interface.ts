@@ -123,13 +123,56 @@ class Firebase {
      **/
 
     /* Create a user with email and password */
-    createUser = (email: string, password: string) => {
-        const promise = this._app.auth()
+    async createUser(
+        firstName: string,
+        lastName: string,
+        mobileNumber: string,
+        email: string,
+        password: string
+    ) {
+        /* Firebase auth user credential */
+        const userCred = await this._app.auth()
             .createUserWithEmailAndPassword(email, password);
-        promise.then(user => {
-            user.user.sendEmailVerification();
+
+        /* Add display name to auth */
+        await userCred.user.updateProfile({
+            displayName: `${firstName} ${lastName}`
         });
-        return promise;
+
+        /* Firestore user */
+        const firestoreUser = {
+            firstName: firstName,
+            lastName: lastName,
+            mobileNumber: mobileNumber
+        };
+
+        /* Ref where the user will be stored */
+        const userDocRef = this._app.firestore().doc(
+            `users/${userCred.user.uid}`
+        );
+
+        /* Set ref */
+        await userDocRef.set(firestoreUser);
+
+        /* User to store in the overall standings */
+        const standingsUser = {
+            uid: userCred.user.uid,
+            firstName: firstName,
+            lastName: lastName,
+            totalPoints: 0,
+            weeklyWins: 0
+        };
+
+        /* Overall standings reference */
+        const standingsDocRef = this._app.firestore().doc(`standings/overall`);
+        const standingsDoc = await standingsDocRef.get();
+        const standingsData = standingsDoc.data();
+        const usersArray = standingsData.users;
+        usersArray.push(standingsUser);
+        await standingsDocRef.set({
+            users: usersArray,
+            ...standingsData
+        });
     }
 
     /* Get the currently signed in user */
