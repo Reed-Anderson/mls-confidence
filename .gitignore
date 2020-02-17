@@ -6,3 +6,4 @@ todo-list.txt
 .vscode
 *.pyc
 *.cache
+*.log
