@@ -1,19 +1,25 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
 import * as HtmlWebPackPlugin from 'html-webpack-plugin';
+import * as DotEnv from 'dotenv';
+import * as path from 'path';
+import { DefinePlugin } from 'webpack';
 
+/* HTML Plugin */
 const htmlPlugin = new HtmlWebPackPlugin({
-    template: './src/launch/index.html',
-    filename: './index.html'
+    template: './src/launch/index.html'
 });
 
-const config: webpack.Configuration = {
+/* Environment Vars plugin */
+const env = DotEnv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev: any, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(env[next]);
+    return prev;
+}, {});
+const envPlugin = new DefinePlugin(envKeys)
+
+/* Exports */
+module.exports = {
     mode: 'production',
     entry: './src/launch/index.tsx',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
-    },
     resolve: {
         /* Add '.ts' and '.tsx' as resolvable extensions. */
         extensions: ['.ts', '.tsx', '.js', '.json']
@@ -21,13 +27,16 @@ const config: webpack.Configuration = {
     module: {
         rules: [
             /**
-             * All files with a '.ts' or '.tsx' extension will
-             * be handled by 'awesome-typescript-loader'.
+             * All files with a '.ts' or '.tsx' extension will be
+             * handled by 'awesome-typescript-loader'.
              */
             { test: /\.tsx?$/, loader: 'awesome-typescript-loader' }
         ]
     },
-    plugins: [htmlPlugin]
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js',
+        publicPath: '/'
+    },
+    plugins: [htmlPlugin, envPlugin],
 };
-
-export default config;
