@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Select, Text, ResponsiveContext } from 'grommet';
+import { Box, Select, Text } from 'grommet';
 import { getCurrentWeek } from '../utils/helpers';
 import { useHistory } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ const WeekPicker = (props: Props) => {
         >
             <Text margin={{ right: 'small' }}>
                 Displayed Week:
-                    </Text>
+            </Text>
             <Box width='100px'>
                 <Select
                     onChange={selectOption}

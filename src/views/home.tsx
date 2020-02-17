@@ -82,7 +82,7 @@ const HomeView = () => {
                     color='neutral-4'
                     loading
                     title='Weekly Win Leaders'
-                    to='/standings/weekly'
+                    to='/standings?weekly=true'
                 >
                 </TitledFloatBox>
             </Box>

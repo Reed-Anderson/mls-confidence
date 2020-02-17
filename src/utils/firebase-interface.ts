@@ -92,6 +92,12 @@ class Firebase {
      * Weeks and Picks
      **/
 
+    /* Returns all users in firestore */
+    requestStandings = () => {
+        const standingsPath = `standings/overall`;
+        return new Promise(res => this.handleRef(standingsPath, res, res));
+    }
+
     /* Returns promise of the given week in the database */
     requestWeek = (weekNumber: number): Promise<DocumentData> => {
         const weekPath = `weeks/${weekNumber}`;
