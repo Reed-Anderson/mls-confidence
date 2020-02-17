@@ -66,7 +66,6 @@ const HomeView = () => {
                     color='neutral-1'
                     loading
                     title={`Last Week's Results`}
-                    to={`/results/${getCurrentWeek() - 1}`}
                 >
                 </TitledFloatBox>
                 <TitledFloatBox
