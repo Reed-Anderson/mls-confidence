@@ -19,7 +19,7 @@ const SaveRow = (props: Props) => {
                     align='center'
                     background={'light-3'}
                     direction={size === 'small' ? 'column' : 'row'}
-                    height='fit-content'
+                    height={{ min: 'auto' }}
                     margin={{ bottom: 'medium' }}
                     pad='small'
                     round='small'
