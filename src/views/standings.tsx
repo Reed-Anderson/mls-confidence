@@ -19,11 +19,11 @@ const StandingsView = () => {
     const [loading, setLoading] = React.useState(true);
 
     /* Use query strings to determine standings mode */
-    let standingsType: StandingsType = 'Overall'
+    let standingsType: StandingsType = 'Overall';
     const loc = useLocation();
     const query = new URLSearchParams(loc.search);
     if (query.get('weekly')?.toLowerCase() === 'true') {
-        standingsType = 'Weekly Wins'
+        standingsType = 'Weekly Wins';
     }
 
     /* Firebase context */
@@ -50,15 +50,25 @@ const StandingsView = () => {
     const reset = () => {
         setLoading(true);
         setUsers([]);
-    }
+    };
 
     return (
-        <Box as='div' fill align='center'>
+        <Box
+            align='center'
+            as='div'
+            fill
+            height='100%'
+            overflow={{ vertical: 'auto' }}
+        >
             <ViewTitle title='Season Standings' />
             <StandingsPicker onSelect={reset} type={standingsType} />
             <PageLoader loading={loading} />
             {!loading && (
-                <Box width={{ max: '675px' }}>
+                <Box
+                    height={{ min: 'auto' }}
+                    pad={{ bottom: '25px' }}
+                    width={{ max: '675px' }}
+                >
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -74,10 +84,16 @@ const StandingsView = () => {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {users.map(user => (
+                            {users.map((user, index) => (
                                 <TableRow key={user.uid}>
                                     <TableCell size='large'>
-                                        <Text weight='bold'>
+                                        <Text
+                                            margin={{ right: '10px' }}
+                                            weight='bold'
+                                        >
+                                            {index + 1}
+                                        </Text>
+                                        <Text>
                                             {user.firstName} {user.lastName}
                                         </Text>
                                     </TableCell>
