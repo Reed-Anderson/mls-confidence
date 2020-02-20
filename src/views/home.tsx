@@ -40,6 +40,7 @@ const HomeView = () => {
     return (
         <Box
             align='center'
+            fill
             overflow='auto'
             pad={{ horizontal: 'small' }}
         >
