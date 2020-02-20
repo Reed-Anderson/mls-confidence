@@ -29,6 +29,10 @@ const ToggleBox = React.memo((props: Props) => {
         size: 'small'
     }
 
+    /* Short-circuit onClick event when dim */
+    const onClick = props.status === 'dim' ?
+        undefined : () => props.onClick(props.value);
+
     /* Return the ToggleBox component */
     return (
         <StyledToggleBox
@@ -36,7 +40,7 @@ const ToggleBox = React.memo((props: Props) => {
             border={border}
             elevation={active ? 'xsmall' : ''}
             focusIndicator={false}
-            onClick={() => props.onClick(props.value)}
+            onClick={onClick}
             pad='xsmall'
             round='xsmall'
         >

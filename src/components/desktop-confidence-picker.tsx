@@ -31,13 +31,13 @@ const DesktopConfidencePicker = React.memo((props: Props) => {
     /* Determine if a number is active, dim, or normal */
     const getToggleBoxStatus = (num: number): 'normal' | 'dim' | 'active' => {
         if (num === props.selectedNumber) {
-            return 'active'
+            return 'active';
         }
         else if (props.usedNumbers.includes(num)) {
-            return 'dim'
+            return 'dim';
         }
         else {
-            return 'normal'
+            return 'normal';
         }
     }
 
