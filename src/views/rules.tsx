@@ -67,66 +67,71 @@ const standingsText = (
  */
 const RulesView = () => {
     return (
-        <ResponsiveContext.Consumer>
-            {size => {
-                const textSize = size === 'small' ? 'small' : 'medium'
-                return (
-                    <Box align='center' as='div' fill pad='medium'>
-                        <ViewTitle title='MLS Confidence Pool Rules' />
-                        <TitledFloatBox
-                            boxProps={boxProps}
-                            color='neutral-1'
-                            title='What is a Confidence Pool?'
-                        >
-                            <Text margin='small' size={textSize}>
-                                {whatIsText}
-                            </Text>
-                        </TitledFloatBox>
-                        <TitledFloatBox
-                            boxProps={boxProps}
-                            color='neutral-3'
-                            title='MLS-Specific Rules'
-                        >
-                            <Text margin='small' size={textSize}>
-                                {mlsSpecText}
-                                <ul>
-                                    <Text
-                                        as='li'
-                                        size={textSize}
-                                        margin={{ vertical: 'small' }}
-                                    >
-                                        {li1}
+        <Headered activeDisplayName='Rules'>
+            <ResponsiveContext.Consumer>
+                {size => {
+                    const textSize = size === 'small' ? 'small' : 'medium'
+                    return (
+                        <Box align='center' as='div' fill pad='medium'>
+                            <ViewTitle title='MLS Confidence Pool Rules' />
+                            <Box height={{ min: 'auto' }} pad='small'>
+                                <TitledFloatBox
+                                    boxProps={boxProps}
+                                    color='neutral-1'
+                                    title='What is a Confidence Pool?'
+                                >
+                                    <Text margin='small' size={textSize}>
+                                        {whatIsText}
                                     </Text>
-                                    <Text
-                                        as='li'
-                                        size={textSize}
-                                        margin={{ vertical: 'small' }}
-                                    >
-                                        {li2}
+                                </TitledFloatBox>
+                                <TitledFloatBox
+                                    boxProps={boxProps}
+                                    color='neutral-3'
+                                    title='MLS-Specific Rules'
+                                >
+                                    <Text margin='small' size={textSize}>
+                                        {mlsSpecText}
+                                        <ul>
+                                            <Text
+                                                as='li'
+                                                size={textSize}
+                                                margin={{ vertical: 'small' }}
+                                            >
+                                                {li1}
+                                            </Text>
+                                            <Text
+                                                as='li'
+                                                size={textSize}
+                                                margin={{ vertical: 'small' }}
+                                            >
+                                                {li2}
+                                            </Text>
+                                            <Text
+                                                as='li'
+                                                size={textSize}
+                                                margin={{ vertical: 'small' }}
+                                            >
+                                                {li3}
+                                            </Text>
+                                        </ul>
                                     </Text>
-                                    <Text
-                                        as='li'
-                                        size={textSize}
-                                        margin={{ vertical: 'small' }}
-                                    >
-                                        {li3}
+                                </TitledFloatBox>
+                                <TitledFloatBox
+                                    boxProps={boxProps}
+                                    color='neutral-4'
+                                    title='Standings'
+                                >
+                                    <Text margin='small' size={textSize}>
+                                        {standingsText}
                                     </Text>
-                                </ul>
-                            </Text>
-                        </TitledFloatBox>
-                        <TitledFloatBox
-                            boxProps={boxProps}
-                            color='neutral-4'
-                            title='Standings'
-                        >
-                            <Text margin='small' size={textSize}>
-                                {standingsText}
-                            </Text>
-                        </TitledFloatBox>
-                    </Box>
-        )}}
-        </ResponsiveContext.Consumer>
+                                </TitledFloatBox>
+                            </Box>
+                        </Box>
+                    )
+                }}
+            </ResponsiveContext.Consumer>
+        </Headered>
     );
 };
 
-export default () => Headered(RulesView(), 'Rules');
+export default RulesView;

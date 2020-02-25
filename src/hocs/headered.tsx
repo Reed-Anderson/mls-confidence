@@ -28,9 +28,17 @@ const MainLink = styled(Link)`
 `
 
 /**
+ * Props for Headered component
+ */
+interface Props {
+    activeDisplayName?: string
+    children: JSX.Element | JSX.Element[]
+}
+
+/**
  * Higher Order Component to give passed content a header
  */
-const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
+const Headered = ( props: Props ) => {
 
     /* State to indicate whether to show the sidebar */
     const [showSidebar, setShowSideBar] = React.useState(false);
@@ -91,19 +99,12 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
         </Box>
     );
 
-    /* Returns the given content wrapped in a Box */
-    const wrappedContent = () => (
-        <Box align='center' fill overflow='auto'>
-            {content}
-        </Box>
-    );
-
     /* Maps the sidebar options into components */
     const renderSidebarOptions = () => {
         return sidebarItems.map(item => (
             <SidebarOption
                 key={`sidebar_option_${item.displayName}`}
-                activeDisplayName={activeDisplayName}
+                activeDisplayName={props.activeDisplayName}
                 toggleSidebarOpen={toggleSidebarOpen}
                 {...item}
             />
@@ -161,14 +162,23 @@ const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
     return (
         <ResponsiveContext.Consumer>
             {size => (
+                /**
+                 * This is the first box in the Grommet Style.
+                 * It fills parent height. Shouldn't overflow.
+                 */
                 <Box fill>
                     {headerBox()}
+                    {/* The box below puts the content and sidebar in a row */}
                     <Box
                         direction='row'
-                        flex
+                        fill
                         overflow='hidden'
                     >
-                        {wrappedContent()}
+                        {/* The box below fills the parent's
+                            height and controls overflow */}
+                        <Box align='center' fill overflow='auto'>
+                            {props.children}
+                        </Box>
                         {size === 'small' ? smallSidebar() : standardSidebar()}
                     </Box>
                 </Box>

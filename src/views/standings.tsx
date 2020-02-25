@@ -53,13 +53,7 @@ const StandingsView = () => {
     };
 
     return (
-        <Box
-            align='center'
-            as='div'
-            fill
-            height='100%'
-            overflow={{ vertical: 'auto' }}
-        >
+        <Headered activeDisplayName='Standings'>
             <ViewTitle title='Season Standings' />
             <StandingsPicker onSelect={reset} type={standingsType} />
             <PageLoader loading={loading} />
@@ -109,8 +103,8 @@ const StandingsView = () => {
                     </Table>
                 </Box>
             )}
-        </Box>
+        </Headered>
     );
 };
 
-export default () => Headered(StandingsView(), 'Standings');
+export default StandingsView;

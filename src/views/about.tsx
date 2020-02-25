@@ -54,53 +54,56 @@ const AboutView = () => {
         <ResponsiveContext.Consumer>
             {size => {
                 const textSize = size === 'small' ? 'small' : 'medium'
+                const buttonBoxPad = { bottom: 'small', horizontal: 'small' }
                 return (
-                    <Box align='center' as='div' fill pad='medium'>
+                    <Headered activeDisplayName='About'>
                         <ViewTitle title='About MLS Confidence Pool' />
-                        <TitledFloatBox
-                            boxProps={boxProps}
-                            color='neutral-1'
-                            title='Project Motivations'
-                        >
-                            <Text margin='small' size={textSize}>
-                                {motivationsText}
-                            </Text>
-                        </TitledFloatBox>
-                        <TitledFloatBox
-                            boxProps={boxProps}
-                            color='neutral-3'
-                            title='Contact Me'
-                        >
-                            <Text margin='small' size={textSize}>
-                                {contactMeText}
-                            </Text>
-                        </TitledFloatBox>
-                        <TitledFloatBox
-                            boxProps={boxProps}
-                            color='neutral-4'
-                            title='Behind The Scenes'
-                        >
-                            <Text margin='small' size={textSize}>
-                                {behindText}
-                            </Text>
-                            <Box
-                                align='center'
-                                pad={{ bottom: 'small', horizontal: 'small' }}
+                        <Box height={{ min: 'auto' }} pad='small'>
+                            <TitledFloatBox
+                                boxProps={boxProps}
+                                color='neutral-1'
+                                title='Project Motivations'
                             >
-                                <Button
-                                    color='brand'
-                                    icon={<Github />}
-                                    href={githubLink}
-                                    label='Github'
-                                    target='_blank'
-                                />
-                            </Box>
-                        </TitledFloatBox>
-                    </Box>
+                                <Text margin='small' size={textSize}>
+                                    {motivationsText}
+                                </Text>
+                            </TitledFloatBox>
+                            <TitledFloatBox
+                                boxProps={boxProps}
+                                color='neutral-3'
+                                title='Contact Me'
+                            >
+                                <Text margin='small' size={textSize}>
+                                    {contactMeText}
+                                </Text>
+                            </TitledFloatBox>
+                            <TitledFloatBox
+                                boxProps={boxProps}
+                                color='neutral-4'
+                                title='Behind The Scenes'
+                            >
+                                <Text margin='small' size={textSize}>
+                                    {behindText}
+                                </Text>
+                                <Box
+                                    align='center'
+                                    pad={buttonBoxPad}
+                                >
+                                    <Button
+                                        color='brand'
+                                        icon={<Github />}
+                                        href={githubLink}
+                                        label='Github'
+                                        target='_blank'
+                                    />
+                                </Box>
+                            </TitledFloatBox>
+                        </Box>
+                    </Headered>
                 )
             }}
         </ResponsiveContext.Consumer>
     );
 };
 
-export default () => Headered(AboutView(), 'About');
+export default AboutView;

@@ -131,9 +131,10 @@ const RegisterView = () => {
 
     /* Return the register view */
     return (
+        <Headered activeDisplayName='Register'>
         <Box as='div' align='center' fill>
             <ViewTitle pushFromTop title='Create a New Account!' />
-            <Box width='medium'>
+            <Box height={{ min: 'auto' }} width='medium'>
                 <Form
                     onChange={onChange}
                     onSubmit={submitForm}
@@ -206,8 +207,9 @@ const RegisterView = () => {
                 </Form>
             </Box>
         </Box>
+        </Headered>
     );
 };
 
 /* Export the AboutView with a header */
-export default () => LogoutRequired(Headered(RegisterView(), 'Register'));
+export default () => LogoutRequired(RegisterView());

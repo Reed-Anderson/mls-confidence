@@ -7,21 +7,23 @@ import { useHistory } from 'react-router-dom';
 const ErrorView = () => {
     const history = useHistory();
     return (
-        <Box
-            align='center'
-            alignContent='center'
-            flex='grow'
-            gap='medium'
-            margin='large'
-        >
-            <h1>Error 404</h1>
-            <p>Page not found</p>
-            <Button
-                label='Go Back'
-                onClick={() => history.goBack()}
-            />
-        </Box>
+        <Headered>
+            <Box
+                align='center'
+                alignContent='center'
+                flex='grow'
+                gap='medium'
+                margin='large'
+            >
+                <h1>Error 404</h1>
+                <p>Page not found</p>
+                <Button
+                    label='Go Back'
+                    onClick={() => history.goBack()}
+                />
+            </Box>
+        </Headered>
     );
 };
 
-export default () => Headered(ErrorView());
+export default ErrorView;

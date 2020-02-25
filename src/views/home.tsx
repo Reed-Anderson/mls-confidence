@@ -38,12 +38,7 @@ const HomeView = () => {
     }, []);
 
     return (
-        <Box
-            align='center'
-            fill
-            overflow='auto'
-            pad={{ horizontal: 'small' }}
-        >
+        <Headered activeDisplayName='Home'>
             <ViewTitle
                 pushFromTop
                 secondaryTitle={secondaryTitle}
@@ -51,6 +46,7 @@ const HomeView = () => {
             />
             <Box
                 direction='row'
+                height={{ min: 'auto' }}
                 justify='center'
                 pad='small'
                 width={{ max: '1075px' }}
@@ -86,8 +82,8 @@ const HomeView = () => {
                 >
                 </TitledFloatBox>
             </Box>
-        </Box>
+        </Headered>
     );
 };
 
-export default () => Headered(HomeView(), 'Home');
+export default HomeView;
