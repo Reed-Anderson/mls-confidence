@@ -176,7 +176,7 @@ const Headered = ( props: Props ) => {
                     >
                         {/* The box below fills the parent's
                             height and controls overflow */}
-                        <Box align='center' fill overflow='auto'>
+                        <Box align='center' flex overflow='auto'>
                             {props.children}
                         </Box>
                         {size === 'small' ? smallSidebar() : standardSidebar()}

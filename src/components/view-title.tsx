@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Heading, HeadingProps, Text, ResponsiveContext } from 'grommet';
+import { Heading, HeadingProps, Text, ResponsiveContext, Box } from 'grommet';
 
 /* Interface for props needed for the ViewTitle component */
 export interface ViewTitleProps {
@@ -30,7 +30,7 @@ const ViewTitle = (props: ViewTitleProps) => (
         {size => {
             const pushFromTop = size !== 'small' && props.pushFromTop;
             return (
-                <>
+                <Box flex={false} pad={{ horizontal: 'medium' }}>
                     <StyledViewTitle
                         color='dark-2'
                         level={2}
@@ -51,7 +51,7 @@ const ViewTitle = (props: ViewTitleProps) => (
                             {props.secondaryTitle}
                         </Text>
                     )}
-                </>
+                </Box>
             );
         }}
     </ResponsiveContext.Consumer>
