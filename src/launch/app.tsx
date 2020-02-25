@@ -12,6 +12,7 @@ import { Grommet } from 'grommet';
 import { COLORS } from '../utils/constants';
 import Firebase from '../utils/firebase-interface';
 import FirebaseInitializer from '../hocs/firebase-initializer';
+import Div100vh from 'react-div-100vh';
 
 /* Global Grommet theme */
 const theme = {
@@ -50,51 +51,53 @@ const App = () => {
 
     /* Return App */
     return (
-        <Grommet theme={theme} full>
-            <BrowserRouter>
-                <FirebaseContext.Provider value={firebaseInstance}>
-                    <FirebaseInitializer>
-                        <Switch>
-                            <Route
-                                exact
-                                component={HomeView}
-                                path='/'
-                            />
-                            <Route
-                                exact
-                                component={AboutView}
-                                path='/about'
-                            />
-                            <Route
-                                exact
-                                component={RulesView}
-                                path='/rules'
-                            />
-                            <Route
-                                exact
-                                component={LoginView}
-                                path='/login'
-                            />
-                            <Route
-                                exact
-                                component={RegisterView}
-                                path='/register'
-                            />
-                            <Route
-                                exact
-                                component={StandingsView}
-                                path='/standings'
-                            />
-                            <Route
-                                component={PickView}
-                                path='/pick/:weekNumber'
-                            />
-                            <Route path='*' component={ErrorView} />
-                        </Switch>
-                    </FirebaseInitializer>
-                </FirebaseContext.Provider>
-            </BrowserRouter>
-        </Grommet>
+        <Div100vh>
+            <Grommet style={{ height: '100%' }} theme={theme}>
+                <BrowserRouter>
+                    <FirebaseContext.Provider value={firebaseInstance}>
+                        <FirebaseInitializer>
+                            <Switch>
+                                <Route
+                                    exact
+                                    component={HomeView}
+                                    path='/'
+                                />
+                                <Route
+                                    exact
+                                    component={AboutView}
+                                    path='/about'
+                                />
+                                <Route
+                                    exact
+                                    component={RulesView}
+                                    path='/rules'
+                                />
+                                <Route
+                                    exact
+                                    component={LoginView}
+                                    path='/login'
+                                />
+                                <Route
+                                    exact
+                                    component={RegisterView}
+                                    path='/register'
+                                />
+                                <Route
+                                    exact
+                                    component={StandingsView}
+                                    path='/standings'
+                                />
+                                <Route
+                                    component={PickView}
+                                    path='/pick/:weekNumber'
+                                />
+                                <Route path='*' component={ErrorView} />
+                            </Switch>
+                        </FirebaseInitializer>
+                    </FirebaseContext.Provider>
+                </BrowserRouter>
+            </Grommet>
+        </Div100vh>
     )
 };
 

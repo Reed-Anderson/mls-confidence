@@ -18,8 +18,8 @@ const whatIsText = (
     commonly run in conjunction with the NFL season. Each week
     participants predict the winner of each game, and assign a
     "confidence" number to each prediction made. High numbers
-    indicate high confidence, low numbers indicate low
-    confidence. Numbers cannot be reused. Correctly predicting a
+    indicate high confidence, low numbers indicate low confidence.
+    Each available number is used once. Correctly predicting a
     game earns the participant points equal to the assigned
     confidence.`
 );
