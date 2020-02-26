@@ -86,7 +86,6 @@ const Headered = ( props: Props ) => {
             background='brand'
             direction='row'
             elevation='medium'
-            flex={false}
             justify='between'
             pad={pad}
             style={{ zIndex: 1 }}
