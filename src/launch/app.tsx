@@ -50,7 +50,7 @@ const App = () => {
 
     /* Return App */
     return (
-        <Grommet full theme={theme}>
+        <Grommet theme={theme} full>
             <BrowserRouter>
                 <FirebaseContext.Provider value={firebaseInstance}>
                     <FirebaseInitializer>

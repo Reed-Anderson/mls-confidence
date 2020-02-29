@@ -28,17 +28,9 @@ const MainLink = styled(Link)`
 `
 
 /**
- * Props for Headered component
- */
-interface Props {
-    activeDisplayName?: string
-    children: JSX.Element | JSX.Element[]
-}
-
-/**
  * Higher Order Component to give passed content a header
  */
-const Headered = ( props: Props ) => {
+const Headered = (content: React.ReactNode, activeDisplayName?: string) => {
 
     /* State to indicate whether to show the sidebar */
     const [showSidebar, setShowSideBar] = React.useState(false);
@@ -99,12 +91,19 @@ const Headered = ( props: Props ) => {
         </Box>
     );
 
+    /* Returns the given content wrapped in a Box */
+    const wrappedContent = () => (
+        <Box align='center' fill overflow='auto'>
+            {content}
+        </Box>
+    );
+
     /* Maps the sidebar options into components */
     const renderSidebarOptions = () => {
         return sidebarItems.map(item => (
             <SidebarOption
                 key={`sidebar_option_${item.displayName}`}
-                activeDisplayName={props.activeDisplayName}
+                activeDisplayName={activeDisplayName}
                 toggleSidebarOpen={toggleSidebarOpen}
                 {...item}
             />
@@ -162,23 +161,14 @@ const Headered = ( props: Props ) => {
     return (
         <ResponsiveContext.Consumer>
             {size => (
-                /**
-                 * This is the first box in the Grommet Style.
-                 * It fills parent height. Shouldn't overflow.
-                 */
                 <Box fill>
                     {headerBox()}
-                    {/* The box below puts the content and sidebar in a row */}
                     <Box
                         direction='row'
-                        fill
+                        flex
                         overflow='hidden'
                     >
-                        {/* The box below fills the parent's
-                            height and controls overflow */}
-                        <Box align='center' flex overflow='auto'>
-                            {props.children}
-                        </Box>
+                        {wrappedContent()}
                         {size === 'small' ? smallSidebar() : standardSidebar()}
                     </Box>
                 </Box>

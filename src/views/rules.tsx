@@ -18,8 +18,8 @@ const whatIsText = (
     commonly run in conjunction with the NFL season. Each week
     participants predict the winner of each game, and assign a
     "confidence" number to each prediction made. High numbers
-    indicate high confidence, low numbers indicate low confidence.
-    Each available number is used once. Correctly predicting a
+    indicate high confidence, low numbers indicate low
+    confidence. Numbers cannot be reused. Correctly predicting a
     game earns the participant points equal to the assigned
     confidence.`
 );
@@ -67,71 +67,66 @@ const standingsText = (
  */
 const RulesView = () => {
     return (
-        <Headered activeDisplayName='Rules'>
-            <ResponsiveContext.Consumer>
-                {size => {
-                    const textSize = size === 'small' ? 'small' : 'medium'
-                    return (
-                        <Box align='center' as='div' fill pad='medium'>
-                            <ViewTitle title='MLS Confidence Pool Rules' />
-                            <Box height={{ min: 'auto' }} pad='small'>
-                                <TitledFloatBox
-                                    boxProps={boxProps}
-                                    color='neutral-1'
-                                    title='What is a Confidence Pool?'
-                                >
-                                    <Text margin='small' size={textSize}>
-                                        {whatIsText}
+        <ResponsiveContext.Consumer>
+            {size => {
+                const textSize = size === 'small' ? 'small' : 'medium'
+                return (
+                    <Box align='center' as='div' fill pad='medium'>
+                        <ViewTitle title='MLS Confidence Pool Rules' />
+                        <TitledFloatBox
+                            boxProps={boxProps}
+                            color='neutral-1'
+                            title='What is a Confidence Pool?'
+                        >
+                            <Text margin='small' size={textSize}>
+                                {whatIsText}
+                            </Text>
+                        </TitledFloatBox>
+                        <TitledFloatBox
+                            boxProps={boxProps}
+                            color='neutral-3'
+                            title='MLS-Specific Rules'
+                        >
+                            <Text margin='small' size={textSize}>
+                                {mlsSpecText}
+                                <ul>
+                                    <Text
+                                        as='li'
+                                        size={textSize}
+                                        margin={{ vertical: 'small' }}
+                                    >
+                                        {li1}
                                     </Text>
-                                </TitledFloatBox>
-                                <TitledFloatBox
-                                    boxProps={boxProps}
-                                    color='neutral-3'
-                                    title='MLS-Specific Rules'
-                                >
-                                    <Text margin='small' size={textSize}>
-                                        {mlsSpecText}
-                                        <ul>
-                                            <Text
-                                                as='li'
-                                                size={textSize}
-                                                margin={{ vertical: 'small' }}
-                                            >
-                                                {li1}
-                                            </Text>
-                                            <Text
-                                                as='li'
-                                                size={textSize}
-                                                margin={{ vertical: 'small' }}
-                                            >
-                                                {li2}
-                                            </Text>
-                                            <Text
-                                                as='li'
-                                                size={textSize}
-                                                margin={{ vertical: 'small' }}
-                                            >
-                                                {li3}
-                                            </Text>
-                                        </ul>
+                                    <Text
+                                        as='li'
+                                        size={textSize}
+                                        margin={{ vertical: 'small' }}
+                                    >
+                                        {li2}
                                     </Text>
-                                </TitledFloatBox>
-                                <TitledFloatBox
-                                    boxProps={boxProps}
-                                    color='neutral-4'
-                                    title='Standings'
-                                >
-                                    <Text margin='small' size={textSize}>
-                                        {standingsText}
+                                    <Text
+                                        as='li'
+                                        size={textSize}
+                                        margin={{ vertical: 'small' }}
+                                    >
+                                        {li3}
                                     </Text>
-                                </TitledFloatBox>
-                            </Box>
-                        </Box>
-                    )
-                }}
-            </ResponsiveContext.Consumer>
-        </Headered>
+                                </ul>
+                            </Text>
+                        </TitledFloatBox>
+                        <TitledFloatBox
+                            boxProps={boxProps}
+                            color='neutral-4'
+                            title='Standings'
+                        >
+                            <Text margin='small' size={textSize}>
+                                {standingsText}
+                            </Text>
+                        </TitledFloatBox>
+                    </Box>
+        )}}
+        </ResponsiveContext.Consumer>
     );
 };
 
-export default RulesView;
+export default () => Headered(RulesView(), 'Rules');

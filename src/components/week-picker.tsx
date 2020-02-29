@@ -40,7 +40,6 @@ const WeekPicker = (props: Props) => {
         <Box
             align='center'
             direction='row'
-            flex={{ shrink: 0 }}
             pad={{ bottom: 'medium' }}
         >
             <Text margin={{ right: 'small' }}>

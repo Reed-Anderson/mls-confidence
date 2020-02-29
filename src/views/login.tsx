@@ -66,7 +66,7 @@ const LoginView = () => {
 
     /* Return the login view */
     return (
-        <Headered activeDisplayName='Log In'>
+        <Box as='div' fill align='center'>
             <ViewTitle pushFromTop title='Log in to your account!' />
             <Box width='medium'>
                 <Form
@@ -111,8 +111,8 @@ const LoginView = () => {
                     </Box>
                 </Form>
             </Box>
-        </Headered>
+        </Box>
     );
 };
 
-export default () => LogoutRequired(LoginView());
+export default () => LogoutRequired(Headered(LoginView(), 'Log In'));

@@ -188,39 +188,35 @@ const PickView = () => {
      * Render Pick view
      ***********************/
     return (
-        <Headered activeDisplayName='Pick'>
+        <Box align='center' fill height={{ min: 'fit-content' }}>
             <ViewTitle title={`Picks for Week ${weekNumber}!`} />
             <WeekPicker
                 onSelect={reset}
                 weekNumber={parseInt(weekNumber)}
             />
             <PageLoader loading={!picks.length} />
-            <Box height={{ min: 'auto' }}>
-                {picks.map((pick: GamePick, index: number) => {
-                    return (
-                        <GamePicker
-                            key={`game_${index}`}
-                            allNumbers={allNumbers}
-                            setAwayGoals={val => setAwayGoals(index, val)}
-                            setConfidence={val => setConfidence(index, val)}
-                            setHomeGoals={val => setHomeGoals(index, val)}
-                            usedNumbers={usedNumbers}
-                            {...pick}
-                        />
-                    );
-                })}
-            </Box>
-            {!!picks.length && (
-                <Box height={{ min: 'auto' }} pad='small'>
-                    <SaveRow
-                        disableSave={disableSave}
-                        dueDate={dueDate}
-                        onSave={saveFn}
+            {picks.map((pick: GamePick, index: number) => {
+                return (
+                    <GamePicker
+                        key={`game_${index}`}
+                        allNumbers={allNumbers}
+                        setAwayGoals={val => setAwayGoals(index, val)}
+                        setConfidence={val => setConfidence(index, val)}
+                        setHomeGoals={val => setHomeGoals(index, val)}
+                        usedNumbers={usedNumbers}
+                        {...pick}
                     />
-                </Box>
+                );
+            })}
+            {!!picks.length && (
+                <SaveRow
+                    disableSave={disableSave}
+                    dueDate={dueDate}
+                    onSave={saveFn}
+                />
             )}
-        </Headered>
+        </Box>
     );
 };
 
-export default () => LoginRequired(PickView());
+export default () => LoginRequired(Headered(PickView(), 'Pick'));
