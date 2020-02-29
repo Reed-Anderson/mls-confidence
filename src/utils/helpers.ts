@@ -57,6 +57,9 @@ export const arraysEqual = (a: any[], b: any[]) => {
 }
 
 export const dateToString = (date: Date) => {
+    if (!date) {
+        return 'Date Unknown';
+    }
     const timeFormat: Intl.DateTimeFormatOptions = {
         month: 'short',
         day: 'numeric',

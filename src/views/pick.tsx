@@ -42,7 +42,7 @@ const PickView = () => {
      ***********************/
 
     /* Store due date returned from firebase */
-    const [dueDate, setDueDate] = React.useState('Due Date Unknown');
+    const [dueDate, setDueDate] = React.useState(null as Date);
 
     /* State for picks returned from firebase and modified by user */
     const [picks, setPicks] = React.useState([] as GamePick[]);
@@ -61,7 +61,7 @@ const PickView = () => {
         const weekPromise = firebase.requestWeek(parseInt(weekNumber));
         const pickPromise = firebase.requestWeekPick(parseInt(weekNumber));
         Promise.all([weekPromise, pickPromise]).then(([week, picks]) => {
-            setDueDate(dateToString(new Date(week.dueDate?.seconds * 1000)));
+            setDueDate(new Date(week.dueDate?.seconds * 1000));
             const gamePicks: GamePick[] = week?.games?.map(
                 (game: any, index: number) => {
                     const kickoff = new Date(game.kickoff?.seconds * 1000);
@@ -176,13 +176,17 @@ const PickView = () => {
     const reset = () => {
         setPicks([]);
         setWasEdited(false);
-        setDueDate('Due Date Unknown');
+        setDueDate(null);
     };
 
     /************************
      * Render Consts
      ***********************/
-    const disableSave = allNumbers.length !== usedNumbers.length || !wasEdited
+    const disableSave = (
+        allNumbers.length !== usedNumbers.length
+        || !wasEdited
+        || new Date() > dueDate
+    );
 
     /************************
      * Render Pick view
@@ -210,8 +214,8 @@ const PickView = () => {
             })}
             {!!picks.length && (
                 <SaveRow
+                    dateString={dateToString(dueDate)}
                     disableSave={disableSave}
-                    dueDate={dueDate}
                     onSave={saveFn}
                 />
             )}

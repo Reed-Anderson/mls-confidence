@@ -5,8 +5,8 @@ import GrowDiv from './grow-div';
 
 /* Props for the component */
 interface Props {
+    dateString: string
     disableSave: boolean
-    dueDate: string
     onSave: () => void
 };
 
@@ -26,7 +26,7 @@ const SaveRow = (props: Props) => {
                     width={size === 'small' ? 'fit-content' : '675px'}
                 >
                     <Text>
-                        Picks are due <b>{props.dueDate}</b>.
+                        Picks are due <b>{props.dateString}</b>.
                     </Text>
                     <GrowDiv />
                     <Button
