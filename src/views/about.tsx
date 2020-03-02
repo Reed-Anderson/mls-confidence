@@ -42,7 +42,7 @@ const behindText = (
     and libraries. I've made all my code (excluding database secrets) public on
     my personal Github. I encourage anyone curious to check out the source code
     and reach out with any questions or suggestions! I also want to thank Eileen
-    Moran, who was an enourmous help in populating the database with the MLS
+    Moran, who was an enormous help in populating the database with the MLS
     schedule!`
 );
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from 'grommet';
+import { Box, Text } from 'grommet';
 import Headered from '../hocs/headered';
 import ViewTitle from '../components/view-title';
 import LoginStatusBox from '../components/login-status-box';
@@ -38,12 +38,7 @@ const HomeView = () => {
     }, []);
 
     return (
-        <Box
-            align='center'
-            fill
-            overflow='auto'
-            pad={{ horizontal: 'small' }}
-        >
+        <Box align='center' fill pad={{ horizontal: 'small' }}>
             <ViewTitle
                 pushFromTop
                 secondaryTitle={secondaryTitle}
