@@ -1,11 +1,11 @@
 /**
  * Static Weekly Dates
  */
-export const week1 = new Date(2020, 3, 2);
-export const week2 = new Date(2020, 3, 9);
-export const week3 = new Date(2020, 3, 16);
-export const week4 = new Date(2020, 3, 23);
-export const week5 = new Date(2020, 4, 6);
+export const week1 = new Date(2020, 2, 2);
+export const week2 = new Date(2020, 2, 9);
+export const week3 = new Date(2020, 2, 16);
+export const week4 = new Date(2020, 2, 23);
+export const week5 = new Date(2020, 3, 6);
 
 /**
  * Function to calculate the current week of the season
@@ -15,19 +15,19 @@ export const week5 = new Date(2020, 4, 6);
  */
 export const getCurrentWeek = (): number => {
     const now = new Date();
-    if (now < week1) {
+    if (now.valueOf() < week1.valueOf()) {
         return 1;
     }
-    if (now < week2) {
+    if (now.valueOf() < week2.valueOf()) {
         return 2;
     }
-    if (now < week3) {
+    if (now.valueOf() < week3.valueOf()) {
         return 3;
     }
-    if (now < week4) {
+    if (now.valueOf() < week4.valueOf()) {
         return 4;
     }
-    if (now < week5) {
+    if (now.valueOf() < week5.valueOf()) {
         return 5;
     }
     return 5;

@@ -38,7 +38,12 @@ const HomeView = () => {
     }, []);
 
     return (
-        <Box align='center' fill pad={{ horizontal: 'small' }}>
+        <Box
+            align='center'
+            fill
+            height={{ min: 'fit-content' }}
+            pad={{ horizontal: 'small' }}
+        >
             <ViewTitle
                 pushFromTop
                 secondaryTitle={secondaryTitle}
@@ -46,6 +51,7 @@ const HomeView = () => {
             />
             <Box
                 direction='row'
+                height={{ min: 'fit-content' }}
                 justify='center'
                 pad='small'
                 width={{ max: '1075px' }}

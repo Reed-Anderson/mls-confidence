@@ -95,7 +95,7 @@ for picks in picks_documents:
 
     for user in user_totals:
         if user[ 'uid' ] == user_id:
-            user[ 'totalPoints' ] = user.get( 'score', 0 ) + score
+            user[ 'totalPoints' ] = user.get( 'totalPoints', 0 ) + score
             user[ 'gamesCorrect' ] = user.get( 'gamesCorrect', 0 ) + games_correct
             user[ 'scoresCorrect' ] = user.get( 'scoresCorrect', 0 ) + scores_correct
             user[ 'pointsDoubled' ] = user.get( 'pointsDoubled', 0 ) + points_doubled
