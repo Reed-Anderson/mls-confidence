@@ -25,20 +25,24 @@ const StandingsView = () => {
     if (query.get('weekly')?.toLowerCase() === 'true') {
         standingsType = 'Weekly Wins';
     }
+    else if (query.get('week')) {
+        standingsType = parseInt(query.get('week'));
+    }
 
     /* Firebase context */
     const firebase = React.useContext(FirebaseContext);
 
     /* Get the standings, then set users and loading */
-    const standingsPromise = firebase.requestStandings();
+    const weekNumber = typeof standingsType === 'number' ? standingsType : 0;
+    const standingsPromise = firebase.requestStandings(weekNumber);
     standingsPromise.then((result: any) => {
         if (result?.users) {
             result.users.sort((a: any, b: any) => {
-                if (standingsType === 'Overall') {
-                    return b.totalPoints - a.totalPoints;
+                if (standingsType === 'Weekly Wins') {
+                    return b.weeklyWins - a.weeklyWins;
                 }
                 else {
-                    return b.weeklyWins - a.weeklyWins;
+                    return b.totalPoints - a.totalPoints;
                 }
             });
             setUsers(result.users);
@@ -75,12 +79,19 @@ const StandingsView = () => {
                                 <TableCell border='bottom' size='large'>
                                     Name
                                 </TableCell>
+                                {typeof standingsType === 'number' && (
+                                    <TableCell border='bottom' size='small'>
+                                        Points Doubled
+                                    </TableCell>
+                                )}
                                 <TableCell border='bottom' size='small'>
                                     Total Points
                                 </TableCell>
-                                <TableCell border='bottom' size='small'>
-                                    Weekly Wins
-                                </TableCell>
+                                {typeof standingsType !== 'number' && (
+                                    <TableCell border='bottom' size='small'>
+                                        Weekly Wins
+                                    </TableCell>
+                                )}
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -97,12 +108,19 @@ const StandingsView = () => {
                                             {user.firstName} {user.lastName}
                                         </Text>
                                     </TableCell>
+                                    {typeof standingsType === 'number' && (
+                                        <TableCell size='small'>
+                                            {user.pointsDoubled}
+                                        </TableCell>
+                                    )}
                                     <TableCell size='small'>
                                         {user.totalPoints}
                                     </TableCell>
-                                    <TableCell size='small'>
-                                        {user.weeklyWins}
-                                    </TableCell>
+                                    {typeof standingsType !== 'number' && (
+                                        <TableCell size='small'>
+                                            {user.weeklyWins}
+                                        </TableCell>
+                                    )}
                                 </TableRow>
                             ))}
                         </TableBody>

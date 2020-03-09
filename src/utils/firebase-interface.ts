@@ -93,9 +93,15 @@ class Firebase {
      **/
 
     /* Returns all users in firestore */
-    requestStandings = () => {
-        const standingsPath = `standings/overall`;
-        return new Promise(res => this.handleRef(standingsPath, res, res));
+    requestStandings = (weekNumber?: number) => {
+        if (weekNumber) {
+            const standingsPath = `standings/${weekNumber}`;
+            return new Promise(res => this.handleRef(standingsPath, res, res));
+        }
+        else {
+            const standingsPath = `standings/overall`;
+            return new Promise(res => this.handleRef(standingsPath, res, res));
+        }
     }
 
     /* Returns promise of the given week in the database */

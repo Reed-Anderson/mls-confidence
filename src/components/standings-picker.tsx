@@ -34,7 +34,7 @@ const StandingsPicker = (props: Props) => {
     const selectType = (option: { value: StandingsType }) => {
         if (option.value !== props.type) {
             props.onSelect?.();
-            switch(option.value) {
+            switch (option.value) {
                 case 'Overall':
                     history.push('/standings');
                     break;
@@ -42,7 +42,7 @@ const StandingsPicker = (props: Props) => {
                     history.push('/standings?weekly=true');
                     break;
                 default:
-                    history.push('/standings');
+                    history.push(`/standings?week=${option.value}`);
                     break;
             }
         }
